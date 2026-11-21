@@ -1,0 +1,1209 @@
+/* ==========================================================================
+   SUBHAJIT MONDAL - GUMROAD NEO-BRUTALISM PORTFOLIO STYLESHEET
+   Design System: Gumroad Aesthetic, Hard Offset Black Shadows, Heavy Borders,
+   Vibrant Color Blocks, Tactile Press Interactions & Parallax Depth
+   ========================================================================== */
+
+:root {
+  /* Gumroad Signature Color Palette */
+  --bg-cream: #F4F4F0;
+  --bg-white: #FFFFFF;
+  --black: #000000;
+  
+  --gumroad-pink: #FF90E8;
+  --gumroad-yellow: #FFC900;
+  --gumroad-green: #23A094;
+  --gumroad-mint: #00F5A0;
+  --gumroad-blue: #90A8ED;
+  --gumroad-coral: #FF6B00;
+
+  /* Typography */
+  --font-main: 'Space Grotesk', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+
+  /* Neo-Brutalist Dimensions */
+  --border-thick: 2.5px solid #000000;
+  --border-thin: 2px solid #000000;
+  --shadow-base: 4px 4px 0px #000000;
+  --shadow-lg: 6px 6px 0px #000000;
+  --shadow-hover: 7px 7px 0px #000000;
+  --shadow-active: 1px 1px 0px #000000;
+  
+  --radius-card: 12px;
+  --radius-btn: 999px;
+  --radius-sm: 8px;
+
+  --transition-fast: 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Base Reset & Gumroad Background */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  background-color: var(--bg-cream);
+}
+
+body {
+  background-color: var(--bg-cream);
+  color: var(--black);
+  font-family: var(--font-main);
+  line-height: 1.5;
+  overflow-x: hidden;
+  position: relative;
+  min-height: 100vh;
+  /* Neo-brutalist subtle dot texture */
+  background-image: radial-gradient(#000000 1px, transparent 1px);
+  background-size: 28px 28px;
+  background-position: 0 0;
+}
+
+::selection {
+  background: var(--gumroad-pink);
+  color: var(--black);
+}
+
+.container {
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  position: relative;
+  z-index: 10;
+}
+
+/* ==========================================================================
+   FLOATING PARALLAX STICKERS & SHAPES
+   ========================================================================== */
+.parallax-canvas-layer {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.parallax-sticker {
+  position: absolute;
+  pointer-events: auto;
+  cursor: pointer;
+  font-family: var(--font-main);
+  font-weight: 800;
+  border: var(--border-thick);
+  box-shadow: var(--shadow-base);
+  will-change: transform;
+  transition: box-shadow 0.15s ease;
+}
+.parallax-sticker:hover {
+  box-shadow: 6px 6px 0px #000;
+}
+
+.sticker-star-1 {
+  top: 14%;
+  left: 6%;
+  background: var(--gumroad-yellow);
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  transform: rotate(-10deg);
+}
+
+.sticker-badge-1 {
+  top: 32%;
+  right: 5%;
+  background: var(--gumroad-pink);
+  padding: 6px 14px;
+  border-radius: var(--radius-btn);
+  font-size: 0.82rem;
+  transform: rotate(8deg);
+}
+
+.sticker-star-2 {
+  top: 56%;
+  left: 4%;
+  background: var(--gumroad-mint);
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  transform: rotate(15deg);
+}
+
+.sticker-pill-1 {
+  top: 72%;
+  right: 7%;
+  background: var(--gumroad-blue);
+  padding: 6px 16px;
+  border-radius: var(--radius-btn);
+  font-size: 0.8rem;
+  transform: rotate(-6deg);
+}
+
+.sticker-star-3 {
+  top: 88%;
+  left: 10%;
+  background: var(--bg-white);
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  transform: rotate(12deg);
+}
+
+.sticker-circle-1 {
+  top: 22%;
+  right: 18%;
+  background: var(--gumroad-coral);
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: var(--border-thick);
+  box-shadow: 3px 3px 0 #000;
+}
+
+/* ==========================================================================
+   GUMROAD NEO-BRUTALIST NAVBAR (STRICTLY SINGLE LINE)
+   ========================================================================== */
+.nav-wrapper {
+  position: sticky;
+  top: 16px;
+  z-index: 100;
+  margin-bottom: 2rem;
+}
+
+.nb-nav {
+  background: var(--bg-white);
+  border: var(--border-thick);
+  border-radius: var(--radius-btn);
+  box-shadow: var(--shadow-lg);
+  padding: 0.65rem 1.4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: nowrap !important; /* Strictly Single Line */
+  white-space: nowrap !important;
+  gap: 1rem;
+}
+
+.nb-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  color: var(--black);
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+.brand-badge {
+  background: var(--gumroad-yellow);
+  border: var(--border-thin);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-weight: 800;
+  font-size: 0.85rem;
+  padding: 2px 7px;
+  box-shadow: 2px 2px 0 #000;
+}
+.brand-name {
+  font-family: var(--font-main);
+  font-weight: 800;
+  font-size: 1.05rem;
+  letter-spacing: -0.02em;
+}
+
+.nb-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  list-style: none;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+.nb-nav-links a {
+  color: var(--black);
+  text-decoration: none;
+  font-family: var(--font-main);
+  font-weight: 700;
+  font-size: 0.88rem;
+  padding: 6px 12px;
+  border-radius: var(--radius-btn);
+  white-space: nowrap;
+  transition: all var(--transition-fast);
+}
+.nb-nav-links a:hover {
+  background: var(--gumroad-yellow);
+  box-shadow: 2px 2px 0 #000;
+  transform: translateY(-2px);
+}
+
+.nb-nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+/* ==========================================================================
+   NEO-BRUTALIST BUTTONS (TACTILE PRESS DOWN EFFECT)
+   ========================================================================== */
+.nb-btn {
+  font-family: var(--font-main);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  border: var(--border-thick);
+  border-radius: var(--radius-btn);
+  box-shadow: var(--shadow-base);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  text-decoration: none;
+  color: var(--black);
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.nb-btn:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: var(--shadow-hover);
+}
+
+.nb-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: var(--shadow-active);
+}
+
+/* Button Sizes */
+.btn-sm {
+  padding: 6px 14px;
+  font-size: 0.78rem;
+}
+.btn-xs {
+  padding: 4px 10px;
+  font-size: 0.72rem;
+  box-shadow: 2px 2px 0 #000;
+}
+.btn-lg {
+  padding: 12px 24px;
+  font-size: 0.95rem;
+  box-shadow: var(--shadow-lg);
+}
+
+/* Button Color Variants */
+.btn-black {
+  background: var(--black);
+  color: var(--bg-white);
+}
+.btn-black:hover {
+  background: #1a1a1a;
+  color: var(--bg-white);
+}
+
+.btn-yellow {
+  background: var(--gumroad-yellow);
+  color: var(--black);
+}
+
+.btn-pink {
+  background: var(--gumroad-pink);
+  color: var(--black);
+}
+
+.btn-white {
+  background: var(--bg-white);
+  color: var(--black);
+}
+
+.mobile-menu-btn {
+  display: none;
+  font-size: 1.1rem;
+}
+
+/* ==========================================================================
+   GUMROAD MARQUEE TICKER STRIP
+   ========================================================================== */
+.nb-marquee-strip {
+  background: var(--black);
+  color: var(--bg-white);
+  border-top: var(--border-thick);
+  border-bottom: var(--border-thick);
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 9px 0;
+  margin-bottom: 3rem;
+}
+
+.marquee-track {
+  display: inline-flex;
+  gap: 2.5rem;
+  animation: marqueeRoll 25s linear infinite;
+  font-family: var(--font-mono);
+  font-weight: 800;
+  font-size: 0.88rem;
+  letter-spacing: 0.04em;
+}
+
+@keyframes marqueeRoll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ==========================================================================
+   NEO-BRUTALIST CARDS & TAGS
+   ========================================================================== */
+.nb-card {
+  background: var(--bg-white);
+  border: var(--border-thick);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-lg);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.nb-card:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: var(--shadow-hover);
+}
+
+/* Color Classes */
+.bg-yellow { background-color: var(--gumroad-yellow); }
+.bg-pink { background-color: var(--gumroad-pink); }
+.bg-blue { background-color: var(--gumroad-blue); }
+.bg-green { background-color: var(--gumroad-mint); }
+.bg-cream { background-color: var(--bg-cream); }
+.bg-black { background-color: var(--black); }
+.text-white { color: #ffffff; }
+.text-pink { color: #d81b60; font-weight: 800; }
+.text-blue { color: #1d4ed8; font-weight: 800; }
+.text-green { color: #047857; font-weight: 800; }
+
+.nb-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-mono);
+  font-weight: 800;
+  font-size: 0.76rem;
+  padding: 4px 12px;
+  border: var(--border-thin);
+  border-radius: var(--radius-btn);
+  box-shadow: 2px 2px 0px #000;
+  color: var(--black);
+  text-transform: uppercase;
+}
+
+/* ==========================================================================
+   HERO SECTION
+   ========================================================================== */
+.hero-section {
+  padding: 1.5rem 0 3.5rem;
+  position: relative;
+  z-index: 10;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 3.5rem;
+  align-items: center;
+}
+
+.hero-tags-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.hero-title {
+  font-family: var(--font-main);
+  font-weight: 800;
+  font-size: clamp(2.4rem, 5.2vw, 4.4rem);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  margin-bottom: 1.25rem;
+}
+
+.highlight-pink {
+  background: var(--gumroad-pink);
+  padding: 0 8px;
+  border: var(--border-thin);
+  border-radius: var(--radius-sm);
+  display: inline-block;
+  box-shadow: 3px 3px 0 #000;
+  transform: rotate(-1deg);
+}
+
+.hero-subtitle {
+  font-size: 1.15rem;
+  color: #222222;
+  line-height: 1.6;
+  max-width: 620px;
+  margin-bottom: 2rem;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+/* Clean Profile Card (NO Disturbing Circles) */
+.profile-card-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile-card {
+  width: 100%;
+  max-width: 340px;
+  padding: 14px;
+  background: var(--bg-white);
+}
+
+.profile-photo-wrapper {
+  width: 100%;
+  aspect-ratio: 1 / 1.18;
+  border: var(--border-thick);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--gumroad-yellow);
+}
+
+.profile-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  display: block;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.profile-card-footer {
+  margin-top: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.profile-name {
+  font-family: var(--font-main);
+  font-weight: 800;
+  font-size: 1.05rem;
+}
+.profile-role {
+  font-size: 0.8rem;
+  color: #444;
+  font-weight: 600;
+}
+
+.profile-sticker {
+  position: absolute;
+  z-index: 20;
+  font-family: var(--font-mono);
+  font-weight: 800;
+  font-size: 0.78rem;
+  padding: 6px 14px;
+  border: var(--border-thick);
+  border-radius: var(--radius-btn);
+  box-shadow: var(--shadow-base);
+}
+.sticker-top {
+  top: -16px;
+  left: 0;
+  background: var(--gumroad-yellow);
+  transform: rotate(-5deg);
+}
+.sticker-bottom {
+  bottom: -14px;
+  right: 0;
+  background: var(--gumroad-mint);
+  transform: rotate(4deg);
+}
+
+/* ==========================================================================
+   METRIC STATS (GUMROAD BENTO GRID)
+   ========================================================================== */
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+  margin-bottom: 4rem;
+}
+
+.stat-card {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+}
+.stat-number {
+  font-family: var(--font-main);
+  font-weight: 800;
+  font-size: 2.6rem;
+  line-height: 1;
+  margin-bottom: 0.35rem;
+  letter-spacing: -0.02em;
+}
+.stat-label {
+  font-weight: 800;
+  font-size: 0.95rem;
+  margin-bottom: 0.25rem;
+}
+.stat-sub {
+  font-size: 0.82rem;
+  color: #333;
+}
+
+/* ==========================================================================
+   PROJECTS SECTION (CLEAN & CONCISE)
+   ========================================================================== */
+.section-wrapper {
+  margin-bottom: 4.5rem;
+}
+
+.section-title-wrap {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+.section-title {
+  font-family: var(--font-main);
+  font-weight: 800;
+  font-size: clamp(2rem, 3.8vw, 2.8rem);
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  margin-top: 0.5rem;
+}
+.section-desc {
+  font-size: 1rem;
+  color: #444;
+  margin-top: 0.25rem;
+}
+
+.projects-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 2.25rem;
+}
+
+.project-card {
+  padding: 2.25rem;
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 2.5rem;
+  align-items: stretch;
+}
+
+.project-title {
+  font-family: var(--font-main);
+  font-weight: 800;
+  font-size: 1.6rem;
+  line-height: 1.2;
+  margin: 0.6rem 0 1rem;
+}
+
+.nb-chips-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 1.25rem;
+}
+.chip {
+  background: var(--bg-cream);
+  border: var(--border-thin);
+  border-radius: var(--radius-btn);
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  box-shadow: 2px 2px 0 #000;
+}
+
+/* Clean Takeaways */
+.takeaways-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.takeaway-item {
+  background: var(--bg-cream);
+  border: var(--border-thin);
+  border-radius: var(--radius-sm);
+  padding: 9px 12px;
+  font-size: 0.88rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  box-shadow: 2px 2px 0 #000;
+}
+.takeaway-tag {
+  font-family: var(--font-mono);
+  font-weight: 800;
+  font-size: 0.68rem;
+  padding: 2px 6px;
+  border-radius: 4px;
+  border: 1.5px solid #000;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.takeaway-tag.red { background: #fecdd3; color: #9f1239; }
+.takeaway-tag.blue { background: #bfdbfe; color: #1e40af; }
+.takeaway-tag.green { background: #bbf7d0; color: #166534; }
+
+/* Interactive Simulator Blocks */
+.project-interactive {
+  border: var(--border-thick);
+  border-radius: var(--radius-card);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-base);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1.2rem;
+}
+
+.interactive-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 800;
+  border-bottom: var(--border-thin);
+  padding-bottom: 0.6rem;
+}
+
+.badge-mini {
+  font-size: 0.68rem;
+  font-weight: 800;
+  padding: 2px 8px;
+  border: 1.5px solid #000;
+  border-radius: var(--radius-btn);
+  box-shadow: 2px 2px 0 #000;
+}
+
+.mini-kpis {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.6rem;
+}
+.kpi-box {
+  background: var(--bg-white);
+  border: var(--border-thin);
+  border-radius: var(--radius-sm);
+  padding: 8px 10px;
+  text-align: center;
+  box-shadow: 2px 2px 0 #000;
+}
+.kpi-val {
+  font-family: var(--font-main);
+  font-weight: 800;
+  font-size: 1.25rem;
+  line-height: 1.1;
+}
+.kpi-lbl {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: #555;
+  margin-top: 2px;
+}
+
+.interactive-instruction {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 800;
+  margin-bottom: 6px;
+}
+
+.zone-buttons-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+}
+.btn-zone.active {
+  background: var(--gumroad-yellow);
+  box-shadow: 3px 3px 0 #000;
+  transform: translate(-1px, -1px);
+}
+
+.zone-status-box {
+  background: var(--bg-white);
+  border: var(--border-thin);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+  font-size: 0.82rem;
+  line-height: 1.45;
+  box-shadow: 2px 2px 0 #000;
+  margin-top: 8px;
+}
+
+/* Range Slider */
+.slider-container {
+  background: var(--bg-white);
+  border: var(--border-thin);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+  box-shadow: 2px 2px 0 #000;
+}
+.slider-label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 800;
+  margin-bottom: 6px;
+}
+.dio-tag {
+  border: 1.5px solid #000;
+  padding: 1px 7px;
+  border-radius: 4px;
+}
+.nb-range {
+  width: 100%;
+  accent-color: var(--black);
+  cursor: pointer;
+}
+.slider-ticks {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: #666;
+  margin-top: 3px;
+}
+
+/* Schema Buttons */
+.schema-nodes-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.schema-btn {
+  background: var(--bg-white);
+  border: var(--border-thin);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 5px 9px;
+  cursor: pointer;
+  box-shadow: 2px 2px 0 #000;
+  transition: all var(--transition-fast);
+}
+.schema-btn:hover {
+  background: var(--gumroad-yellow);
+  transform: translate(-1px, -1px);
+}
+.schema-btn.active {
+  background: var(--gumroad-pink);
+  box-shadow: 3px 3px 0 #000;
+}
+
+.terminal-box {
+  background: var(--black);
+  color: #f1f5f9;
+  border: var(--border-thin);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  line-height: 1.5;
+  box-shadow: 2px 2px 0 #000;
+  white-space: pre-wrap;
+}
+
+/* ==========================================================================
+   SKILLS GRID
+   ========================================================================== */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+}
+
+.skill-block {
+  padding: 1.5rem;
+}
+
+.skill-header {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 1.25rem;
+}
+.skill-icon {
+  font-size: 1.6rem;
+}
+.skill-header h4 {
+  font-size: 1.15rem;
+  font-weight: 800;
+}
+
+.skill-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+.pill {
+  background: var(--bg-cream);
+  border: var(--border-thin);
+  border-radius: var(--radius-btn);
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  box-shadow: 2px 2px 0 #000;
+}
+
+/* ==========================================================================
+   EXPERIENCE & EDUCATION (TRAJECTORY)
+   ========================================================================== */
+.experience-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.exp-card {
+  padding: 2rem;
+}
+
+.exp-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+  flex-wrap: wrap;
+}
+.exp-title {
+  font-size: 1.3rem;
+  font-weight: 800;
+}
+.exp-company {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #333;
+}
+
+.date-pill {
+  white-space: nowrap !important;
+  flex-shrink: 0;
+  font-weight: 800;
+}
+
+.nb-bullet-list {
+  padding-left: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  font-size: 0.9rem;
+  color: #222;
+}
+
+.cert-box {
+  margin-top: 1.5rem;
+  border-top: var(--border-thin);
+  padding-top: 1rem;
+}
+.cert-title {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+}
+.cert-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+/* Education items */
+.edu-item {
+  display: flex;
+  flex-direction: column;
+}
+.edu-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+.edu-degree {
+  font-size: 1.05rem;
+  font-weight: 800;
+}
+.edu-school {
+  font-size: 0.8rem;
+  color: #444;
+  font-weight: 600;
+}
+.edu-desc {
+  font-size: 0.85rem;
+  color: #333;
+  margin-top: 4px;
+}
+
+/* ==========================================================================
+   FOOTER (GUMROAD TILE)
+   ========================================================================== */
+.footer-wrap {
+  margin-bottom: 4rem;
+}
+.footer-card {
+  padding: 4rem 2rem;
+  text-align: center;
+}
+.footer-title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+.footer-desc {
+  font-size: 1.1rem;
+  max-width: 620px;
+  margin: 0 auto 2rem;
+}
+
+.footer-buttons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  margin-bottom: 2rem;
+}
+
+.footer-socials {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+}
+.footer-socials a {
+  color: var(--black);
+  text-decoration: underline;
+}
+
+.copyright-line {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: #333;
+}
+
+/* ==========================================================================
+   MODALS & TOAST
+   ========================================================================== */
+.nb-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+.nb-modal-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.nb-modal-window {
+  background: var(--bg-cream);
+  border: 3px solid #000;
+  border-radius: var(--radius-card);
+  box-shadow: 8px 8px 0px #000;
+  width: 100%;
+  max-width: 680px;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  transform: scale(0.95);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.nb-modal-overlay.active .nb-modal-window {
+  transform: scale(1);
+}
+
+.nb-modal-header {
+  border-bottom: 2.5px solid #000;
+  padding: 14px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.nb-modal-header h3 {
+  font-size: 1.15rem;
+  font-weight: 800;
+}
+
+.nb-close-btn {
+  background: var(--bg-white);
+  border: 2px solid #000;
+  border-radius: var(--radius-sm);
+  font-size: 1.2rem;
+  font-weight: 800;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  box-shadow: 2px 2px 0 #000;
+}
+.nb-close-btn:hover {
+  background: #fecdd3;
+}
+
+.nb-modal-body {
+  padding: 1.75rem;
+}
+
+.recruiter-quick-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+.quick-box {
+  padding: 10px 14px;
+}
+.quick-lbl {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+.quick-val {
+  font-weight: 800;
+  font-size: 0.95rem;
+  margin-top: 2px;
+}
+
+/* Toast */
+.nb-toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: var(--gumroad-yellow);
+  border: 2.5px solid #000;
+  border-radius: var(--radius-sm);
+  box-shadow: 4px 4px 0 #000;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 800;
+  padding: 12px 20px;
+  z-index: 2000;
+  transform: translateY(120px);
+  opacity: 0;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.nb-toast.show {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* ==========================================================================
+   RESPONSIVE (PHONES & TABLETS)
+   ========================================================================== */
+@media (max-width: 1024px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    text-align: center;
+  }
+  .hero-tags-row {
+    justify-content: center;
+  }
+  .hero-subtitle {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .hero-actions {
+    justify-content: center;
+  }
+  .profile-card-container {
+    order: -1;
+  }
+  .metrics-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .project-card {
+    grid-template-columns: 1fr;
+  }
+  .skills-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .experience-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 860px) {
+  .nb-nav-links {
+    display: none;
+  }
+  .mobile-menu-btn {
+    display: block;
+  }
+}
+
+@media (max-width: 600px) {
+  .metrics-grid {
+    grid-template-columns: 1fr;
+  }
+  .skills-grid {
+    grid-template-columns: 1fr;
+  }
+  .hero-title {
+    font-size: 2.3rem;
+  }
+  .hero-actions {
+    flex-direction: column;
+  }
+  .hero-actions .nb-btn {
+    width: 100%;
+    justify-content: center;
+  }
+  .footer-buttons .nb-btn {
+    width: 100%;
+    justify-content: center;
+  }
+  .zone-buttons-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .recruiter-quick-grid {
+    grid-template-columns: 1fr;
+  }
+}
