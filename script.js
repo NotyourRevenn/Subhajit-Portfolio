@@ -21,6 +21,12 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   function renderParallax() {
+    // Only calculate parallax animations on tablets/desktops to preserve mobile performance
+    if (window.innerWidth <= 768) {
+      requestAnimationFrame(renderParallax);
+      return;
+    }
+
     const scrollY = window.scrollY;
 
     currentMouseX += (targetMouseX - currentMouseX) * 0.08;
@@ -141,7 +147,15 @@ document.addEventListener('DOMContentLoaded', () => {
   if (soundToggleBtn) {
     soundToggleBtn.addEventListener('click', () => {
       soundEnabled = !soundEnabled;
-      soundToggleBtn.innerHTML = soundEnabled ? '🔊 SFX: ON' : '🔇 SFX: OFF';
+      const sfxIcon = soundToggleBtn.querySelector('.sfx-icon');
+      const sfxText = soundToggleBtn.querySelector('.sfx-text');
+      if (sfxIcon && sfxText) {
+        sfxIcon.textContent = soundEnabled ? '🔊' : '🔇';
+        sfxText.textContent = soundEnabled ? 'SFX: ON' : 'SFX: OFF';
+      } else {
+        soundToggleBtn.innerHTML = soundEnabled ? '🔊 SFX: ON' : '🔇 SFX: OFF';
+      }
+      soundToggleBtn.setAttribute('title', soundEnabled ? 'Audio SFX Enabled' : 'Audio SFX Muted');
       if (soundEnabled) {
         playSuccessChime();
         showToast('🔊 Hover & Click Audio Active');
@@ -364,6 +378,7 @@ Finding: Discretionary discounts in East Enterprise drove 45% of leakage.
   openRecruiterBtns.forEach(btn => {
     btn.addEventListener('click', (e) => {
       e.preventDefault();
+      if (mobileDrawer) mobileDrawer.classList.remove('open', 'active');
       if (recruiterModal) {
         recruiterModal.classList.add('active');
         playSuccessChime();
@@ -374,6 +389,7 @@ Finding: Discretionary discounts in East Enterprise drove 45% of leakage.
   openResumeBtns.forEach(btn => {
     btn.addEventListener('click', (e) => {
       e.preventDefault();
+      if (mobileDrawer) mobileDrawer.classList.remove('open', 'active');
       if (resumeModal) {
         resumeModal.classList.add('active');
         playSuccessChime();

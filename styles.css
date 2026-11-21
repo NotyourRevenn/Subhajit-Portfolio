@@ -45,8 +45,13 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 90px;
   font-size: 16px;
   background-color: var(--bg-cream);
+}
+
+#overview, #projects, #skills, #experience, #contact {
+  scroll-margin-top: 90px;
 }
 
 body {
@@ -1135,12 +1140,67 @@ body {
 }
 
 /* ==========================================================================
-   RESPONSIVE (PHONES & TABLETS)
+   MOBILE NAVIGATION DRAWER & LINKS
    ========================================================================== */
+#mobileDrawer.active, #mobileDrawer.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.mobile-drawer-window {
+  max-width: 360px;
+  width: 92%;
+  margin: auto;
+  border: 3px solid #000;
+  border-radius: var(--radius-card);
+  box-shadow: 6px 6px 0 #000;
+  overflow: hidden;
+  background: var(--bg-cream);
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.mobile-drawer-body {
+  padding: 1.25rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  overflow-y: auto;
+}
+
+.drawer-link {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 11px 14px;
+  background: var(--bg-white);
+  border: var(--border-thin);
+  border-radius: var(--radius-sm);
+  box-shadow: 2px 2px 0 #000;
+  font-family: var(--font-main);
+  font-weight: 800;
+  font-size: 0.95rem;
+  color: var(--black);
+  text-decoration: none;
+  transition: all var(--transition-fast);
+}
+
+.drawer-link:hover, .drawer-link:active {
+  background: var(--gumroad-yellow);
+  transform: translate(-2px, -2px);
+  box-shadow: 4px 4px 0 #000;
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN SYSTEM (PHONES, TABLETS, LAPTOPS & DESKTOPS)
+   ========================================================================== */
+
+/* 1. TABLET LANDSCAPE & SMALL LAPTOPS (<= 1024px) */
 @media (max-width: 1024px) {
   .hero-grid {
     grid-template-columns: 1fr;
-    gap: 3rem;
+    gap: 2.5rem;
     text-align: center;
   }
   .hero-tags-row {
@@ -1155,55 +1215,474 @@ body {
   }
   .profile-card-container {
     order: -1;
+    margin-bottom: 0.5rem;
   }
   .metrics-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
   }
   .project-card {
     grid-template-columns: 1fr;
+    gap: 2rem;
   }
   .skills-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
   }
   .experience-grid {
     grid-template-columns: 1fr;
+    gap: 1.25rem;
   }
 }
 
+/* 2. TABLET PORTRAIT (<= 860px) */
 @media (max-width: 860px) {
   .nb-nav-links {
     display: none;
   }
   .mobile-menu-btn {
-    display: block;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .nav-wrapper {
+    top: 10px;
+    margin-bottom: 1.5rem;
+  }
+  .container {
+    padding: 0 1.25rem;
+  }
+  .parallax-canvas-layer {
+    opacity: 0.25;
+    pointer-events: none;
   }
 }
 
-@media (max-width: 600px) {
-  .metrics-grid {
-    grid-template-columns: 1fr;
+/* 3. PHABLETS & LARGE PHONES (<= 680px) */
+@media (max-width: 680px) {
+  .nav-pitch-btn {
+    display: none; /* Accessible in mobile drawer and hero section */
   }
-  .skills-grid {
-    grid-template-columns: 1fr;
+  .nb-nav {
+    padding: 0.5rem 1rem;
+    gap: 0.65rem;
+  }
+  .brand-name {
+    font-size: 0.95rem;
+  }
+  .brand-badge {
+    font-size: 0.78rem;
+    padding: 2px 6px;
+  }
+  .section-title {
+    font-size: clamp(1.75rem, 6vw, 2.3rem);
+  }
+  .section-wrapper {
+    margin-bottom: 3.5rem;
+  }
+}
+
+/* 4. STANDARD SMARTPHONES (<= 540px) */
+@media (max-width: 540px) {
+  html {
+    scroll-padding-top: 75px;
+  }
+  #overview, #projects, #skills, #experience, #contact {
+    scroll-margin-top: 75px;
+  }
+  .container {
+    padding: 0 0.9rem;
+  }
+  .nav-wrapper {
+    top: 8px;
+    margin-bottom: 1.25rem;
+  }
+  .nb-nav {
+    padding: 0.42rem 0.75rem;
+    box-shadow: 4px 4px 0 #000;
+  }
+  .brand-name {
+    font-size: 0.9rem;
+  }
+  #soundToggleBtn {
+    padding: 5px 9px;
+    font-size: 0.74rem;
+  }
+
+  /* Parallax completely disabled on mobile for 60fps & no touch overlap */
+  .parallax-canvas-layer {
+    display: none !important;
+  }
+
+  /* Hero Section */
+  .hero-section {
+    padding: 0.5rem 0 2rem;
   }
   .hero-title {
-    font-size: 2.3rem;
+    font-size: clamp(1.75rem, 7.2vw, 2.35rem);
+    line-height: 1.12;
+    margin-bottom: 1rem;
+  }
+  .hero-subtitle {
+    font-size: 0.95rem;
+    line-height: 1.55;
+    margin-bottom: 1.4rem;
+  }
+  .hero-tags-row {
+    gap: 0.35rem;
+    margin-bottom: 1rem;
+  }
+  .hero-tags-row .nb-tag {
+    font-size: 0.68rem;
+    padding: 3px 8px;
   }
   .hero-actions {
     flex-direction: column;
+    gap: 0.65rem;
+    width: 100%;
   }
   .hero-actions .nb-btn {
     width: 100%;
     justify-content: center;
+    padding: 11px 16px;
+    font-size: 0.88rem;
+  }
+
+  /* Profile Card on Mobile */
+  .profile-card {
+    max-width: 270px;
+    margin: 0 auto;
+    padding: 10px;
+    box-shadow: 4px 4px 0 #000;
+  }
+  .profile-photo-wrapper {
+    border-radius: 6px;
+  }
+  .profile-card-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+  .profile-name {
+    font-size: 0.95rem;
+  }
+  .profile-role {
+    font-size: 0.75rem;
+  }
+  .profile-sticker.sticker-top {
+    top: -10px;
+    left: -2px;
+    font-size: 0.68rem;
+    padding: 3px 9px;
+    box-shadow: 2px 2px 0 #000;
+  }
+  .profile-sticker.sticker-bottom {
+    bottom: -10px;
+    right: -2px;
+    font-size: 0.68rem;
+    padding: 3px 9px;
+    box-shadow: 2px 2px 0 #000;
+  }
+
+  /* Marquee */
+  .nb-marquee-strip {
+    padding: 6px 0;
+    margin-bottom: 2rem;
+    font-size: 0.76rem;
+  }
+
+  /* Metrics Bento Grid (Crisp 2-Column or 1-Column) */
+  .metrics-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.65rem;
+    margin-bottom: 2.75rem;
+  }
+  .stat-card {
+    padding: 1rem 0.75rem;
+    box-shadow: 3px 3px 0 #000;
+  }
+  .stat-number {
+    font-size: clamp(1.65rem, 5.5vw, 2.1rem);
+    margin-bottom: 0.2rem;
+  }
+  .stat-label {
+    font-size: 0.8rem;
+  }
+  .stat-sub {
+    font-size: 0.7rem;
+    line-height: 1.35;
+  }
+
+  /* Projects Section */
+  .project-card {
+    padding: 1.1rem 0.85rem;
+    box-shadow: 4px 4px 0 #000;
+    gap: 1.25rem;
+  }
+  .project-title {
+    font-size: 1.25rem;
+    margin: 0.4rem 0 0.8rem;
+  }
+  .nb-chips-row {
+    gap: 0.3rem;
+    margin-bottom: 1rem;
+  }
+  .chip {
+    font-size: 0.68rem;
+    padding: 2px 7px;
+  }
+  .takeaways-list {
+    gap: 0.55rem;
+  }
+  .takeaway-item {
+    padding: 7px 9px;
+    font-size: 0.8rem;
+    line-height: 1.45;
+  }
+  .takeaway-tag {
+    font-size: 0.6rem;
+    padding: 2px 5px;
+  }
+
+  /* Interactive Simulator Blocks */
+  .project-interactive {
+    padding: 0.9rem 0.75rem;
+    gap: 0.85rem;
+    box-shadow: 3px 3px 0 #000;
+  }
+  .interactive-top {
+    font-size: 0.72rem;
+  }
+  .mini-kpis {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.35rem;
+  }
+  .kpi-box {
+    padding: 6px 3px;
+  }
+  .kpi-val {
+    font-size: clamp(0.92rem, 3.2vw, 1.15rem);
+  }
+  .kpi-lbl {
+    font-size: 0.6rem;
+  }
+  .zone-buttons-row {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 5px;
+  }
+  .btn-zone {
+    font-size: 0.72rem;
+    padding: 6px 8px;
+    justify-content: center;
+  }
+  .zone-status-box {
+    font-size: 0.75rem;
+    padding: 8px 10px;
+    line-height: 1.4;
+  }
+  .slider-container {
+    padding: 8px 10px;
+  }
+  .slider-label-row {
+    font-size: 0.68rem;
+  }
+  .slider-ticks {
+    font-size: 0.58rem;
+  }
+  .schema-nodes-grid {
+    gap: 4px;
+  }
+  .schema-btn {
+    font-size: 0.66rem;
+    padding: 4px 6px;
+  }
+  .terminal-box {
+    font-size: 0.65rem;
+    padding: 8px 10px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Skills Grid */
+  .skills-grid {
+    grid-template-columns: 1fr;
+    gap: 0.85rem;
+  }
+  .skill-block {
+    padding: 1.15rem 0.9rem;
+    box-shadow: 3px 3px 0 #000;
+  }
+  .skill-header {
+    margin-bottom: 0.85rem;
+  }
+  .skill-header h4 {
+    font-size: 1.05rem;
+  }
+  .skill-pills {
+    gap: 0.35rem;
+  }
+  .pill {
+    font-size: 0.7rem;
+    padding: 3px 8px;
+  }
+
+  /* Experience & Education */
+  .exp-card {
+    padding: 1.15rem 0.9rem;
+    box-shadow: 3px 3px 0 #000;
+  }
+  .exp-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.45rem;
+    margin-bottom: 1rem;
+  }
+  .exp-title {
+    font-size: 1.15rem;
+  }
+  .exp-company {
+    font-size: 0.78rem;
+  }
+  .date-pill {
+    font-size: 0.68rem;
+    padding: 2px 7px;
+  }
+  .nb-bullet-list {
+    font-size: 0.82rem;
+    padding-left: 1rem;
+    gap: 0.55rem;
+  }
+  .cert-box {
+    margin-top: 1rem;
+    padding-top: 0.75rem;
+  }
+  .edu-top {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.35rem;
+  }
+  .edu-degree {
+    font-size: 0.95rem;
+  }
+  .edu-school {
+    font-size: 0.76rem;
+  }
+
+  /* Footer Card */
+  .footer-card {
+    padding: 2.25rem 1rem;
+    box-shadow: 4px 4px 0 #000;
+  }
+  .footer-title {
+    font-size: clamp(1.6rem, 5.5vw, 2.1rem);
+  }
+  .footer-desc {
+    font-size: 0.92rem;
+    margin-bottom: 1.5rem;
+  }
+  .footer-buttons {
+    flex-direction: column;
+    gap: 0.65rem;
+    margin-bottom: 1.5rem;
   }
   .footer-buttons .nb-btn {
     width: 100%;
     justify-content: center;
+    font-size: 0.84rem;
+    padding: 11px 14px;
   }
-  .zone-buttons-row {
-    grid-template-columns: repeat(2, 1fr);
+  .footer-socials {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.78rem;
+    margin-bottom: 1.5rem;
+  }
+
+  /* Modals on Mobile */
+  .nb-modal-overlay {
+    padding: 0.5rem;
+  }
+  .nb-modal-window {
+    border-width: 2.5px;
+    box-shadow: 4px 4px 0 #000;
+    max-height: 94vh;
+  }
+  .nb-modal-header {
+    padding: 10px 12px;
+  }
+  .nb-modal-header h3 {
+    font-size: 0.92rem;
+  }
+  .nb-close-btn {
+    width: 28px;
+    height: 28px;
+    font-size: 1rem;
+  }
+  .nb-modal-body {
+    padding: 1rem 0.8rem;
   }
   .recruiter-quick-grid {
     grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+  .copy-trigger {
+    font-size: 0.78rem !important;
+    padding: 10px 8px !important;
+    word-break: break-all;
+  }
+}
+
+/* 5. SMALL PHONES (<= 380px: iPhone SE, Galaxy Fold cover, 320-360px) */
+@media (max-width: 380px) {
+  .container {
+    padding: 0 0.65rem;
+  }
+  .nb-nav {
+    padding: 0.38rem 0.6rem;
+  }
+  .brand-name {
+    font-size: 0.82rem;
+  }
+  .brand-badge {
+    font-size: 0.72rem;
+    padding: 1px 4px;
+  }
+  #soundToggleBtn .sfx-text {
+    display: none; /* Show only 🔊 icon on ultra narrow screens */
+  }
+  #soundToggleBtn {
+    padding: 5px 8px;
+  }
+  .mobile-menu-btn {
+    padding: 5px 9px;
+  }
+  .metrics-grid {
+    grid-template-columns: 1fr;
+  }
+  .hero-title {
+    font-size: 1.7rem;
+  }
+  .profile-card {
+    max-width: 240px;
+  }
+}
+
+/* 6. TOUCH DEVICE ACCESSIBILITY (Prevent sticky hovers) */
+@media (hover: none) {
+  .nb-card:hover,
+  .nb-btn:hover,
+  .nb-tag:hover,
+  .pill:hover,
+  .chip:hover,
+  .schema-btn:hover {
+    transform: none;
+  }
+  .nb-btn:active,
+  .btn-zone:active,
+  .schema-btn:active,
+  .drawer-link:active {
+    transform: translate(2px, 2px);
+    box-shadow: var(--shadow-active);
   }
 }
