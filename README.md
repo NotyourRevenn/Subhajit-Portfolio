@@ -1,6 +1,6 @@
-# Subhajit Mondal - Gumroad Neo-Brutalism Portfolio ✦
+# Subhajit Mondal - Business Analyst / Data Analyst ✦
 
-An ultra-clean, high-impact **Gumroad Neo-Brutalism** portfolio website engineered specifically for **Subhajit Mondal** (Business & Data Analyst).
+An ultra-clean, high-impact interactive portfolio website engineered for **Subhajit Mondal** (Business & Data Analyst).
 
 Combines Gumroad's iconic design language (thick black borders, hard offset black drop-shadows, warm cream background, tactile press-down buttons, marquee ticker, floating parallax stickers, and high-contrast color blocks) with skimmable, concise writing and interactive operations simulators.
 
