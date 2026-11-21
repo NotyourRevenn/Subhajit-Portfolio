@@ -1,4 +1,4 @@
-# Subhajit Mondal - Gumroad Neo-Brutalism Portfolio ✦
+# Subhajit Mondal - Portfolio ✦
 
 An ultra-clean, high-impact **Gumroad Neo-Brutalism** portfolio website engineered specifically for **Subhajit Mondal** (Business & Data Analyst).
 
