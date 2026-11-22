@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LinkedIn Banner Studio — Subhajit Mondal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@600;700;800&family=Space+Grotesk:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background-color: #0c0f17;
+      color: #f1f5f9;
+      font-family: 'Space Grotesk', -apple-system, sans-serif;
+      padding: 2rem 1.5rem 4rem;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .header-bar {
+      text-align: center;
+      max-width: 800px;
+      margin-bottom: 2rem;
+    }
+    .header-bar h1 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(135deg, #FFC900, #FF90E8, #00F5A0);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .header-bar p {
+      font-size: 1rem;
+      color: #94a3b8;
+    }
+
+    .controls-panel {
+      background: #151b28;
+      border: 2px solid #2d3748;
+      border-radius: 12px;
+      padding: 1.25rem 1.75rem;
+      margin-bottom: 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+    }
+    .control-group {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .control-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #cbd5e1;
+      text-transform: uppercase;
+    }
+    .theme-btn {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 800;
+      font-size: 0.85rem;
+      padding: 8px 16px;
+      border-radius: 999px;
+      border: 2px solid transparent;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      background: #1e293b;
+      color: #e2e8f0;
+    }
+    .theme-btn.active {
+      border-color: #00F5A0;
+      background: #00F5A0;
+      color: #000;
+      box-shadow: 0 0 15px rgba(0, 245, 160, 0.4);
+    }
+    .theme-btn:hover:not(.active) {
+      background: #334155;
+    }
+
+    .action-btn {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 800;
+      font-size: 0.95rem;
+      padding: 10px 22px;
+      border-radius: 999px;
+      border: 2px solid #000;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      box-shadow: 3px 3px 0 #000;
+      transition: transform 0.1s ease, box-shadow 0.1s ease;
+    }
+    .btn-download {
+      background: #FFC900;
+      color: #000;
+    }
+    .btn-download:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 5px 5px 0 #000;
+    }
+    .btn-toggle-sim {
+      background: #90A8ED;
+      color: #000;
+    }
+
+    /* Banner Container (4:1 Aspect Ratio) */
+    .banner-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 1200px;
+      aspect-ratio: 4 / 1;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7), 0 0 0 2px #334155;
+      background: #000;
+      margin-bottom: 2rem;
+    }
+
+    /* Actual Canvas (Renders at native 1584 x 396 px) */
+    #bannerCanvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    /* LinkedIn Profile Photo Cutout Overlay Simulator */
+    .linkedin-overlay {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      display: none;
+      z-index: 50;
+    }
+    .linkedin-overlay.visible {
+      display: block;
+    }
+    .avatar-cutout {
+      position: absolute;
+      bottom: -45%;
+      left: 3.5%;
+      width: 28%;
+      aspect-ratio: 1 / 1;
+      border-radius: 50%;
+      border: 6px solid #fff;
+      background-size: cover;
+      background-position: center;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+      background-color: #1e293b;
+    }
+    .avatar-label {
+      position: absolute;
+      bottom: 2%;
+      left: 32%;
+      background: rgba(0, 0, 0, 0.85);
+      border: 1.5px solid #00F5A0;
+      color: #00F5A0;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 6px;
+    }
+    .safe-zone-box {
+      position: absolute;
+      inset: 0;
+      border: 2px dashed rgba(255, 201, 0, 0.4);
+      pointer-events: none;
+    }
+
+    .quick-specs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.25rem;
+      max-width: 1200px;
+      width: 100%;
+    }
+    .spec-card {
+      background: #151b28;
+      border: 1.5px solid #2d3748;
+      border-radius: 10px;
+      padding: 1.25rem;
+    }
+    .spec-card h3 {
+      font-size: 1.05rem;
+      color: #f8fafc;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .spec-card p {
+      font-size: 0.85rem;
+      color: #94a3b8;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 768px) {
+      .header-bar h1 {
+        font-size: 1.6rem;
+      }
+      .controls-panel {
+        flex-direction: column;
+        align-items: stretch;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header-bar">
+    <h1>✦ LinkedIn Banner Studio</h1>
+    <p>High-resolution 1584 x 396 px banners designed specifically for Subhajit Mondal. Profile photo safe zone calculated.</p>
+  </div>
+
+  <div class="controls-panel">
+    <div class="control-group">
+      <span class="control-label">Style:</span>
+      <button class="theme-btn active" data-theme="darkTech">1. Obsidian Tech</button>
+      <button class="theme-btn" data-theme="neobrutal">2. Gumroad Neo-Brutalist</button>
+      <button class="theme-btn" data-theme="executiveNavy">3. Executive SCM Blue</button>
+    </div>
+
+    <div class="control-group">
+      <button id="btnToggleSim" class="action-btn btn-toggle-sim">
+        👁️ Toggle LinkedIn Photo Cutout
+      </button>
+      <button id="btnDownload" class="action-btn btn-download">
+        ⬇️ Download 1584x396 PNG
+      </button>
+    </div>
+  </div>
+
+  <!-- Banner Render Wrapper -->
+  <div class="banner-wrapper">
+    <canvas id="bannerCanvas" width="1584" height="396"></canvas>
+    
+    <!-- LinkedIn Profile Photo Simulator Overlay -->
+    <div class="linkedin-overlay" id="linkedinOverlay">
+      <div class="safe-zone-box"></div>
+      <div class="avatar-cutout" id="avatarSim" style="background-image: url('assets/profile.jpg');"></div>
+      <div class="avatar-label">← LinkedIn Profile Photo Area (Safe Zone Verified)</div>
+    </div>
+  </div>
+
+  <div class="quick-specs-grid">
+    <div class="spec-card">
+      <h3>📐 LinkedIn Certified Dimensions</h3>
+      <p>Rendered at native <strong>1584 × 396 pixels</strong> (exact 4:1 aspect ratio). Razor-sharp on Retina and 4K displays without blurring or cropping.</p>
+    </div>
+    <div class="spec-card">
+      <h3>🛡️ Zero Overlap Guarantee</h3>
+      <p>The bottom-left 250px is kept strictly as negative space so your LinkedIn profile picture won't block your name, metrics, or core skills.</p>
+    </div>
+    <div class="spec-card">
+      <h3>💼 Recruiter 3-Second Hook</h3>
+      <p>Highlights your dual degree (<strong>B.Tech CSE + MBA Analytics</strong>), <strong>₹94.5L+ savings</strong>, and core stack (<strong>SQL • Power BI • SCM ROI</strong>).</p>
+    </div>
+  </div>
+
+  <script>
+    const canvas = document.getElementById('bannerCanvas');
+    const ctx = canvas.getContext('2d');
+    const W = 1584;
+    const H = 396;
+
+    let currentTheme = 'darkTech';
+
+    // Preload font and render
+    document.fonts.ready.then(() => {
+      drawBanner();
+    });
+
+    function drawBanner() {
+      ctx.clearRect(0, 0, W, H);
+
+      if (currentTheme === 'darkTech') {
+        drawDarkTechTheme();
+      } else if (currentTheme === 'neobrutal') {
+        drawNeoBrutalTheme();
+      } else if (currentTheme === 'executiveNavy') {
+        drawExecutiveNavyTheme();
+      }
+    }
+
+    // =========================================================================
+    // THEME 1: OBSIDIAN DARK TECH (Modern Enterprise Data Analytics)
+    // =========================================================================
+    function drawDarkTechTheme() {
+      // Background gradient
+      const bgGrad = ctx.createLinearGradient(0, 0, W, H);
+      bgGrad.addColorStop(0, '#0a0d14');
+      bgGrad.addColorStop(0.5, '#0f172a');
+      bgGrad.addColorStop(1, '#070a10');
+      ctx.fillStyle = bgGrad;
+      ctx.fillRect(0, 0, W, H);
+
+      // Subtle Tech Grid Lines
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.04)';
+      ctx.lineWidth = 1;
+      for (let x = 0; x < W; x += 44) {
+        ctx.beginPath();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, H);
+        ctx.stroke();
+      }
+      for (let y = 0; y < H; y += 44) {
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(W, y);
+        ctx.stroke();
+      }
+
+      // Glowing Ambient Data Orbs (Right side)
+      const orb1 = ctx.createRadialGradient(W - 250, 180, 10, W - 250, 180, 320);
+      orb1.addColorStop(0, 'rgba(0, 245, 160, 0.18)');
+      orb1.addColorStop(0.6, 'rgba(0, 245, 160, 0.04)');
+      orb1.addColorStop(1, 'transparent');
+      ctx.fillStyle = orb1;
+      ctx.fillRect(W - 600, 0, 600, H);
+
+      const orb2 = ctx.createRadialGradient(W - 480, 80, 10, W - 480, 80, 260);
+      orb2.addColorStop(0, 'rgba(144, 168, 237, 0.22)');
+      orb2.addColorStop(1, 'transparent');
+      ctx.fillStyle = orb2;
+      ctx.fillRect(W - 700, 0, 500, H);
+
+      // Abstract Data Stream Wave Line (Right side)
+      ctx.save();
+      ctx.strokeStyle = 'rgba(0, 245, 160, 0.4)';
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+      ctx.moveTo(W - 550, 260);
+      ctx.bezierCurveTo(W - 400, 140, W - 300, 320, W - 60, 180);
+      ctx.stroke();
+
+      // Trend Line Glow
+      ctx.strokeStyle = '#00F5A0';
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+
+      // Data Node Dots on Curve
+      const nodes = [
+        { x: W - 480, y: 205 },
+        { x: W - 380, y: 175 },
+        { x: W - 260, y: 285 },
+        { x: W - 140, y: 215 },
+        { x: W - 60, y: 180 }
+      ];
+      nodes.forEach(pt => {
+        ctx.fillStyle = '#00F5A0';
+        ctx.beginPath();
+        ctx.arc(pt.x, pt.y, 5, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.strokeStyle = '#fff';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+      });
+      ctx.restore();
+
+      // Top Status Badge (Center-Left)
+      drawPill(ctx, 360, 55, '● OPEN FOR BUSINESS & DATA ANALYST ROLES', '#00F5A0', '#052e16', 'rgba(0,245,160,0.3)');
+
+      // Full Name
+      ctx.fillStyle = '#FFFFFF';
+      ctx.font = '900 48px "Space Grotesk", sans-serif';
+      ctx.letterSpacing = '-0.02em';
+      ctx.fillText('SUBHAJIT MONDAL', 360, 135);
+
+      // Core Role Subtitle
+      ctx.fillStyle = '#94a3b8';
+      ctx.font = '700 20px "Space Grotesk", sans-serif';
+      ctx.fillText('Business & Data Analyst  |  Supply Chain & Enterprise Analytics  |  B.Tech CSE + MBA', 360, 172);
+
+      // Metric Bento Badges (Center)
+      drawMetricBadgeDark(ctx, 360, 205, '₹94.5L', 'SCM Value Created', '#FFC900');
+      drawMetricBadgeDark(ctx, 560, 205, '-18.2%', 'Cost-per-Unit Cut', '#FF90E8');
+      drawMetricBadgeDark(ctx, 750, 205, '200K+', 'Relational Records', '#00F5A0');
+
+      // Tech Stack Chips (Bottom center-right)
+      const stack = ['SQL (Window / CTEs)', 'Power BI & DAX', 'Star Schema', 'Advanced Excel', '5-Why RCA'];
+      let chipX = 360;
+      stack.forEach(tech => {
+        chipX += drawTechChipDark(ctx, chipX, 310, tech) + 12;
+      });
+
+      // Contact & Portfolio Link (Far Right)
+      ctx.fillStyle = '#cbd5e1';
+      ctx.font = '700 15px "JetBrains Mono", monospace';
+      ctx.textAlign = 'right';
+      ctx.fillText('🌐 notyourrevenn.github.io/Subhajit-Portfolio', W - 50, 335);
+      ctx.fillStyle = '#64748b';
+      ctx.font = '600 14px "Space Grotesk", sans-serif';
+      ctx.fillText('📍 Kolkata / Pan-India / Remote  •  mondalsubhajit556@gmail.com', W - 50, 360);
+      ctx.textAlign = 'left';
+    }
+
+    function drawPill(ctx, x, y, text, color, bg, border) {
+      ctx.save();
+      ctx.font = '800 13px "JetBrains Mono", monospace';
+      const width = ctx.measureText(text).width + 24;
+      ctx.fillStyle = bg;
+      ctx.strokeStyle = border;
+      ctx.lineWidth = 1.5;
+      roundRect(ctx, x, y, width, 28, 14, true, true);
+      ctx.fillStyle = color;
+      ctx.fillText(text, x + 12, y + 18);
+      ctx.restore();
+    }
+
+    function drawMetricBadgeDark(ctx, x, y, val, label, accent) {
+      ctx.save();
+      ctx.fillStyle = '#111827';
+      ctx.strokeStyle = '#1f2937';
+      ctx.lineWidth = 1.5;
+      roundRect(ctx, x, y, 175, 78, 10, true, true);
+
+      // Top accent strip
+      ctx.fillStyle = accent;
+      ctx.fillRect(x + 12, y + 8, 28, 3);
+
+      ctx.fillStyle = accent;
+      ctx.font = '900 28px "Space Grotesk", sans-serif';
+      ctx.fillText(val, x + 12, y + 44);
+
+      ctx.fillStyle = '#94a3b8';
+      ctx.font = '700 12px "Space Grotesk", sans-serif';
+      ctx.fillText(label, x + 12, y + 64);
+      ctx.restore();
+    }
+
+    function drawTechChipDark(ctx, x, y, text) {
+      ctx.save();
+      ctx.font = '700 13px "JetBrains Mono", monospace';
+      const textW = ctx.measureText(text).width;
+      const w = textW + 20;
+      ctx.fillStyle = '#1e293b';
+      ctx.strokeStyle = '#334155';
+      ctx.lineWidth = 1;
+      roundRect(ctx, x, y, w, 30, 6, true, true);
+      ctx.fillStyle = '#e2e8f0';
+      ctx.fillText(text, x + 10, y + 20);
+      ctx.restore();
+      return w;
+    }
+
+
+    // =========================================================================
+    // THEME 2: GUMROAD NEO-BRUTALISM (Matches Portfolio Website Style)
+    // =========================================================================
+    function drawNeoBrutalTheme() {
+      // Cream Background
+      ctx.fillStyle = '#F4F4F0';
+      ctx.fillRect(0, 0, W, H);
+
+      // Neo-brutalist dot matrix
+      ctx.fillStyle = '#000000';
+      for (let x = 16; x < W; x += 28) {
+        for (let y = 16; y < H; y += 28) {
+          ctx.beginPath();
+          ctx.arc(x, y, 1.2, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
+
+      // Heavy Outer Border
+      ctx.strokeStyle = '#000000';
+      ctx.lineWidth = 8;
+      ctx.strokeRect(4, 4, W - 8, H - 8);
+
+      // Top Tag
+      drawNeoPill(ctx, 360, 40, '● OPEN FOR ROLES', '#00F5A0', '#000');
+      drawNeoPill(ctx, 545, 40, 'B.TECH CSE + MBA ANALYTICS', '#FFC900', '#000');
+
+      // Title
+      ctx.fillStyle = '#000000';
+      ctx.font = '900 52px "Space Grotesk", sans-serif';
+      ctx.letterSpacing = '-0.03em';
+      ctx.fillText('SUBHAJIT MONDAL', 360, 126);
+
+      // Highlight Box behind subtitle
+      ctx.fillStyle = '#000';
+      ctx.font = '800 20px "Space Grotesk", sans-serif';
+      ctx.fillText('BUSINESS & DATA ANALYST  •  LOGISTICS & ENTERPRISE ROI', 360, 165);
+
+      // Neo Bento Metrics
+      drawNeoMetric(ctx, 360, 195, '₹94.5L', 'SCM Value Saved', '#FFC900');
+      drawNeoMetric(ctx, 555, 195, '-18.2%', 'Cost-per-Unit Slashed', '#FF90E8');
+      drawNeoMetric(ctx, 755, 195, '200K+', 'Star Schema Records', '#00F5A0');
+
+      // Stack Tags
+      const stack = ['SQL (Window / CTEs)', 'Power BI', 'Advanced Excel', 'Star Schema', 'DAX'];
+      let chipX = 360;
+      stack.forEach(tech => {
+        chipX += drawNeoChip(ctx, chipX, 305, tech) + 10;
+      });
+
+      // Ticker Banner on the far right
+      ctx.save();
+      ctx.translate(W - 200, 180);
+      ctx.rotate(0.04);
+      ctx.fillStyle = '#FF90E8';
+      ctx.strokeStyle = '#000';
+      ctx.lineWidth = 3;
+      roundRect(ctx, 0, 0, 160, 110, 8, true, true);
+      // Hard offset drop shadow
+      ctx.fillStyle = '#000';
+      ctx.fillRect(5, 110, 160, 6);
+      ctx.fillRect(160, 5, 6, 111);
+
+      ctx.fillStyle = '#000';
+      ctx.font = '900 16px "Space Grotesk", sans-serif';
+      ctx.fillText('★ IMMEDIATE', 15, 35);
+      ctx.fillText('✦ 5+ DASHBOARDS', 15, 62);
+      ctx.fillText('★ 99%+ HYGIENE', 15, 88);
+      ctx.restore();
+
+      // GitHub and Email footer on far right
+      ctx.fillStyle = '#000';
+      ctx.font = '800 14px "JetBrains Mono", monospace';
+      ctx.textAlign = 'right';
+      ctx.fillText('🔗 notyourrevenn.github.io/Subhajit-Portfolio', W - 35, 335);
+      ctx.fillText('✉️ mondalsubhajit556@gmail.com  |  +91 6295716179', W - 35, 360);
+      ctx.textAlign = 'left';
+    }
+
+    function drawNeoPill(ctx, x, y, text, bg, color) {
+      ctx.save();
+      ctx.font = '800 12px "JetBrains Mono", monospace';
+      const width = ctx.measureText(text).width + 24;
+      // Shadow
+      ctx.fillStyle = '#000';
+      roundRect(ctx, x + 3, y + 3, width, 26, 6, true, false);
+      // Body
+      ctx.fillStyle = bg;
+      ctx.strokeStyle = '#000';
+      ctx.lineWidth = 2.5;
+      roundRect(ctx, x, y, width, 26, 6, true, true);
+      ctx.fillStyle = color;
+      ctx.fillText(text, x + 12, y + 17);
+      ctx.restore();
+    }
+
+    function drawNeoMetric(ctx, x, y, val, label, bg) {
+      ctx.save();
+      // Drop Shadow
+      ctx.fillStyle = '#000';
+      roundRect(ctx, x + 4, y + 4, 180, 82, 8, true, false);
+      // Main Card
+      ctx.fillStyle = bg;
+      ctx.strokeStyle = '#000';
+      ctx.lineWidth = 2.5;
+      roundRect(ctx, x, y, 180, 82, 8, true, true);
+
+      ctx.fillStyle = '#000';
+      ctx.font = '900 32px "Space Grotesk", sans-serif';
+      ctx.fillText(val, x + 14, y + 44);
+
+      ctx.font = '800 12px "Space Grotesk", sans-serif';
+      ctx.fillText(label, x + 14, y + 68);
+      ctx.restore();
+    }
+
+    function drawNeoChip(ctx, x, y, text) {
+      ctx.save();
+      ctx.font = '800 13px "JetBrains Mono", monospace';
+      const textW = ctx.measureText(text).width;
+      const w = textW + 20;
+      // Shadow
+      ctx.fillStyle = '#000';
+      roundRect(ctx, x + 2, y + 2, w, 32, 6, true, false);
+      // Chip
+      ctx.fillStyle = '#fff';
+      ctx.strokeStyle = '#000';
+      ctx.lineWidth = 2;
+      roundRect(ctx, x, y, w, 32, 6, true, true);
+      ctx.fillStyle = '#000';
+      ctx.fillText(text, x + 10, y + 21);
+      ctx.restore();
+      return w;
+    }
+
+
+    // =========================================================================
+    // THEME 3: EXECUTIVE SCM BLUEPRINT (Deep Blue & Gold Data Intelligence)
+    // =========================================================================
+    function drawExecutiveNavyTheme() {
+      // Blueprint deep blue
+      const bg = ctx.createLinearGradient(0, 0, W, H);
+      bg.addColorStop(0, '#021024');
+      bg.addColorStop(1, '#052659');
+      ctx.fillStyle = bg;
+      ctx.fillRect(0, 0, W, H);
+
+      // Blueprint Grid
+      ctx.strokeStyle = 'rgba(125, 160, 202, 0.12)';
+      ctx.lineWidth = 1;
+      for (let x = 0; x < W; x += 36) {
+        ctx.beginPath();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, H);
+        ctx.stroke();
+      }
+      for (let y = 0; y < H; y += 36) {
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(W, y);
+        ctx.stroke();
+      }
+
+      // Title & Subtitle
+      ctx.fillStyle = '#7DA0CA';
+      ctx.font = '800 13px "JetBrains Mono", monospace';
+      ctx.letterSpacing = '0.15em';
+      ctx.fillText('// ENTERPRISE DATA INTELLIGENCE & SCM ANALYTICS', 360, 68);
+
+      ctx.fillStyle = '#FFFFFF';
+      ctx.font = '900 50px "Space Grotesk", sans-serif';
+      ctx.letterSpacing = '-0.02em';
+      ctx.fillText('SUBHAJIT MONDAL', 360, 132);
+
+      ctx.fillStyle = '#C1E8FF';
+      ctx.font = '700 20px "Space Grotesk", sans-serif';
+      ctx.fillText('Turning Complex Transactional Data Into Measurable Business ROI', 360, 172);
+
+      // Metrics
+      drawMetricBadgeNavy(ctx, 360, 205, '₹94.5L', 'Annual Cost Reduction', '#5483B3');
+      drawMetricBadgeNavy(ctx, 560, 205, '-18.2%', 'Cost-per-Unit Slashed', '#7DA0CA');
+      drawMetricBadgeNavy(ctx, 760, 205, '200K+', 'Transactional Fact Records', '#C1E8FF');
+
+      // Stack
+      const stack = ['SQL CTEs & Windowing', 'Power BI Modeling', 'Star Schema', 'Excel Data Labs'];
+      let chipX = 360;
+      stack.forEach(tech => {
+        chipX += drawTechChipNavy(ctx, chipX, 310, tech) + 12;
+      });
+
+      // Right Side Contact
+      ctx.fillStyle = '#C1E8FF';
+      ctx.font = '700 15px "JetBrains Mono", monospace';
+      ctx.textAlign = 'right';
+      ctx.fillText('notyourrevenn.github.io/Subhajit-Portfolio', W - 50, 335);
+      ctx.fillStyle = '#7DA0CA';
+      ctx.font = '600 14px "Space Grotesk", sans-serif';
+      ctx.fillText('Kolkata & Pan-India  •  B.Tech CSE + MBA Analytics', W - 50, 360);
+      ctx.textAlign = 'left';
+    }
+
+    function drawMetricBadgeNavy(ctx, x, y, val, label, border) {
+      ctx.save();
+      ctx.fillStyle = 'rgba(2, 16, 36, 0.7)';
+      ctx.strokeStyle = border;
+      ctx.lineWidth = 1.5;
+      roundRect(ctx, x, y, 185, 78, 8, true, true);
+
+      ctx.fillStyle = '#FFFFFF';
+      ctx.font = '900 28px "Space Grotesk", sans-serif';
+      ctx.fillText(val, x + 14, y + 42);
+
+      ctx.fillStyle = '#7DA0CA';
+      ctx.font = '700 12px "Space Grotesk", sans-serif';
+      ctx.fillText(label, x + 14, y + 64);
+      ctx.restore();
+    }
+
+    function drawTechChipNavy(ctx, x, y, text) {
+      ctx.save();
+      ctx.font = '700 13px "JetBrains Mono", monospace';
+      const textW = ctx.measureText(text).width;
+      const w = textW + 22;
+      ctx.fillStyle = 'rgba(5, 38, 89, 0.8)';
+      ctx.strokeStyle = '#5483B3';
+      ctx.lineWidth = 1;
+      roundRect(ctx, x, y, w, 32, 6, true, true);
+      ctx.fillStyle = '#C1E8FF';
+      ctx.fillText(text, x + 11, y + 21);
+      ctx.restore();
+      return w;
+    }
+
+    // Helper: Rounded Rectangle
+    function roundRect(ctx, x, y, width, height, radius, fill, stroke) {
+      ctx.beginPath();
+      ctx.moveTo(x + radius, y);
+      ctx.lineTo(x + width - radius, y);
+      ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+      ctx.lineTo(x + width, y + height - radius);
+      ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+      ctx.lineTo(x + radius, y + height);
+      ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+      ctx.lineTo(x, y + radius);
+      ctx.quadraticCurveTo(x, y, x + radius, y);
+      ctx.closePath();
+      if (fill) ctx.fill();
+      if (stroke) ctx.stroke();
+    }
+
+    // Controls Handling
+    document.querySelectorAll('.theme-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.theme-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentTheme = btn.getAttribute('data-theme');
+        drawBanner();
+      });
+    });
+
+    const overlay = document.getElementById('linkedinOverlay');
+    const btnToggleSim = document.getElementById('btnToggleSim');
+    btnToggleSim.addEventListener('click', () => {
+      overlay.classList.toggle('visible');
+    });
+
+    // 1-Click PNG Download (Native 1584 x 396 px)
+    const btnDownload = document.getElementById('btnDownload');
+    btnDownload.addEventListener('click', () => {
+      const dataUrl = canvas.toDataURL('image/png');
+      const a = document.createElement('a');
+      a.href = dataUrl;
+      a.download = `subhajit-mondal-linkedin-banner-${currentTheme}.png`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    });
+  </script>
+</body>
+</html>
