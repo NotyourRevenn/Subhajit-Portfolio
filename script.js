@@ -1,483 +1,270 @@
 /* ==========================================================================
-   SUBHAJIT MONDAL - GUMROAD NEO-BRUTALISM ENGINE
-   Omnipresent Tactile Hover & Click Audio System, Parallax Sticker Engine,
-   Interactive Operations Simulators & Recruiter Modals
+   SUBHAJIT MONDAL — BUSINESS & DATA ANALYST
+   Interactive Decision Labs, Data Telemetry & Modal Management
+   Designed for clarity, performance, and institutional precision
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
 
   // ------------------------------------------------------------------------
-  // 1. Neo-Brutalist Parallax Engine (Scroll & Mouse Tracking)
+  // 1. Interactive Simulator 1: Warehouse Zone Velocity Model
   // ------------------------------------------------------------------------
-  const parallaxStickers = document.querySelectorAll('.parallax-sticker');
-  let targetMouseX = 0;
-  let targetMouseY = 0;
-  let currentMouseX = 0;
-  let currentMouseY = 0;
-
-  window.addEventListener('mousemove', (e) => {
-    targetMouseX = (e.clientX - window.innerWidth / 2) / (window.innerWidth / 2);
-    targetMouseY = (e.clientY - window.innerHeight / 2) / (window.innerHeight / 2);
-  });
-
-  function renderParallax() {
-    // Only calculate parallax animations on tablets/desktops to preserve mobile performance
-    if (window.innerWidth <= 768) {
-      requestAnimationFrame(renderParallax);
-      return;
-    }
-
-    const scrollY = window.scrollY;
-
-    currentMouseX += (targetMouseX - currentMouseX) * 0.08;
-    currentMouseY += (targetMouseY - currentMouseY) * 0.08;
-
-    parallaxStickers.forEach(sticker => {
-      const speed = parseFloat(sticker.getAttribute('data-parallax-speed')) || 0.15;
-      const transY = scrollY * speed + currentMouseY * (speed * 40);
-      const transX = currentMouseX * (speed * 50);
-
-      sticker.style.transform = `translate3d(${transX.toFixed(1)}px, ${transY.toFixed(1)}px, 0)`;
-    });
-
-    requestAnimationFrame(renderParallax);
-  }
-
-  renderParallax();
-
-  // ------------------------------------------------------------------------
-  // 2. Omnipresent Tactile Web Audio Synthesizer (Zero External Dependencies)
-  // ------------------------------------------------------------------------
-  let soundEnabled = true;
-  let audioCtx = null;
-  let lastSoundTime = 0;
-
-  function initAudio() {
-    if (!audioCtx) {
-      const AudioContext = window.AudioContext || window.webkitAudioContext;
-      if (AudioContext) audioCtx = new AudioContext();
-    }
-    if (audioCtx && audioCtx.state === 'suspended') {
-      audioCtx.resume();
-    }
-  }
-
-  // Auto-unlock audio on any initial interaction so hover sounds work immediately
-  ['pointerdown', 'mousemove', 'keydown', 'scroll', 'touchstart'].forEach(evt => {
-    window.addEventListener(evt, () => initAudio(), { once: true, passive: true });
-  });
-
-  // Master Synth Generator with anti-clipping rate limiter
-  function playSynth(freq, type = 'sine', duration = 0.03, vol = 0.04) {
-    if (!soundEnabled) return;
-    const now = performance.now();
-    if (now - lastSoundTime < 10) return; // Prevent audio distortion
-    lastSoundTime = now;
-
-    try {
-      initAudio();
-      if (!audioCtx) return;
-      if (audioCtx.state === 'suspended') audioCtx.resume();
-
-      const osc = audioCtx.createOscillator();
-      const gain = audioCtx.createGain();
-      osc.type = type;
-      osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
-      gain.gain.setValueAtTime(vol, audioCtx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
-
-      osc.connect(gain);
-      gain.connect(audioCtx.destination);
-      osc.start();
-      osc.stop(audioCtx.currentTime + duration);
-    } catch (e) {}
-  }
-
-  // Sound Profile 1: Bouncy bubble pop for buttons
-  function playButtonPop(freq = 620) {
-    playSynth(freq, 'sine', 0.035, 0.045);
-  }
-
-  // Sound Profile 2: Ultra-crisp tactile tick for tags, chips, pills & badges
-  function playPillTick(freq = 980) {
-    playSynth(freq, 'triangle', 0.02, 0.035);
-  }
-
-  // Sound Profile 3: Resonant wooden block thud for big cards & bento boxes
-  function playCardThud(freq = 400) {
-    playSynth(freq, 'sine', 0.04, 0.04);
-  }
-
-  // Sound Profile 4: Crisp acoustic tick for navigation links & brand
-  function playNavClack(freq = 820) {
-    playSynth(freq, 'triangle', 0.025, 0.04);
-  }
-
-  // Sound Profile 5: Tactile mechanical snap on click
-  function playClickSnap(freq = 880) {
-    playSynth(freq, 'square', 0.035, 0.05);
-  }
-
-  // Sound Profile 6: Ascending 4-tone C-Major chord for modals & copy confirmations
-  function playSuccessChime() {
-    if (!soundEnabled) return;
-    try {
-      initAudio();
-      if (!audioCtx) return;
-      if (audioCtx.state === 'suspended') audioCtx.resume();
-
-      const notes = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6
-      notes.forEach((freq, idx) => {
-        setTimeout(() => {
-          if (!soundEnabled) return;
-          playSynth(freq, 'triangle', 0.12, 0.045);
-        }, idx * 55);
-      });
-    } catch (e) {}
-  }
-
-  // Sound Profile 7: Dynamic frequency sweep on slider drag
-  function playSliderTick(val) {
-    const freq = 340 + (val * 45);
-    playSynth(freq, 'sine', 0.025, 0.04);
-  }
-
-  // Sound Toggle Button
-  const soundToggleBtn = document.getElementById('soundToggleBtn');
-  if (soundToggleBtn) {
-    soundToggleBtn.addEventListener('click', () => {
-      soundEnabled = !soundEnabled;
-      const sfxIcon = soundToggleBtn.querySelector('.sfx-icon');
-      const sfxText = soundToggleBtn.querySelector('.sfx-text');
-      if (sfxIcon && sfxText) {
-        sfxIcon.textContent = soundEnabled ? '🔊' : '🔇';
-        sfxText.textContent = soundEnabled ? 'SFX: ON' : 'SFX: OFF';
-      } else {
-        soundToggleBtn.innerHTML = soundEnabled ? '🔊 SFX: ON' : '🔇 SFX: OFF';
-      }
-      soundToggleBtn.setAttribute('title', soundEnabled ? 'Audio SFX Enabled' : 'Audio SFX Muted');
-      if (soundEnabled) {
-        playSuccessChime();
-        showToast('🔊 Hover & Click Audio Active');
-      } else {
-        showToast('🔇 Audio Muted');
-      }
-    });
-  }
-
-  // ------------------------------------------------------------------------
-  // 3. ATTACH HOVER & CLICK SOUNDS TO EVERY ELEMENT ACROSS THE ENTIRE UI
-  // ------------------------------------------------------------------------
-
-  // A. Buttons & Interactive Controls (Bubble Pop on Hover, Snap on Click)
-  document.querySelectorAll('button, .nb-btn, .btn-zone, .schema-btn, .nb-close-btn, .mobile-menu-btn').forEach(el => {
-    el.addEventListener('mouseenter', () => playButtonPop(640));
-    el.addEventListener('click', () => playClickSnap(920));
-  });
-
-  // B. Navigation Links, Brand & Social Links (Crisp Clack on Hover)
-  document.querySelectorAll('.nb-nav-links a, .drawer-link, .nb-brand, .footer-socials a, a').forEach(el => {
-    el.addEventListener('mouseenter', () => playNavClack(800));
-    el.addEventListener('click', () => playClickSnap(860));
-  });
-
-  // C. Cards, Bento Blocks, Experience & Project Tiles (Resonant Thud on Hover)
-  document.querySelectorAll('.nb-card, .stat-card, .project-card, .skill-block, .exp-card, .profile-card, .quick-box, .footer-card, .project-interactive').forEach(el => {
-    el.addEventListener('mouseenter', () => playCardThud(400));
-  });
-
-  // D. Badges, Chips, Pills, Tags & Small Elements (Micro Tactile Tick on Hover)
-  document.querySelectorAll('.nb-tag, .chip, .pill, .takeaway-item, .takeaway-tag, .badge-mini, .profile-sticker, .brand-badge, .dio-tag, .kpi-box, .date-pill').forEach(el => {
-    el.addEventListener('mouseenter', () => {
-      // Tiny random pitch variation for playful tactile keyboard/sticker feel
-      const pitch = 950 + (Math.random() * 120);
-      playPillTick(pitch);
-    });
-  });
-
-  // E. Floating Parallax Stickers (Playful High Chime on Hover)
-  document.querySelectorAll('.parallax-sticker').forEach(el => {
-    el.addEventListener('mouseenter', () => playPillTick(1200));
-    el.addEventListener('click', () => playButtonPop(800));
-  });
-
-  // F. Profile Photo Portal
-  document.querySelectorAll('.profile-photo-wrapper, .profile-photo').forEach(el => {
-    el.addEventListener('mouseenter', () => playButtonPop(520));
-  });
-
-  // G. Marquee Ticker Strip
-  document.querySelectorAll('.nb-marquee-strip').forEach(el => {
-    el.addEventListener('mouseenter', () => playNavClack(700));
-  });
-
-  // H. Range Slider Track
-  document.querySelectorAll('.nb-range').forEach(el => {
-    el.addEventListener('mouseenter', () => playButtonPop(680));
-  });
-
-  // ------------------------------------------------------------------------
-  // 4. Project 1: Warehouse Zone Simulator
-  // ------------------------------------------------------------------------
-  const zoneBtns = document.querySelectorAll('.btn-zone');
-  const zoneStatusText = document.getElementById('zoneStatusMonitor');
-  const dashThroughput = document.getElementById('dashThroughput');
-  const dashCpuMetric = document.getElementById('dashCpuMetric');
-  const dashTravelMetric = document.getElementById('dashTravelMetric');
-
   const zoneData = {
     'zone-a': {
-      status: 'ZONE A (INBOUND AIRLOCK): Pallet unload turnaround: 4.1 mins. Barcode scanner sync rate: 99.8%. Velocity nominal.',
+      cpu: '₹43.8',
+      cpuDelta: '-3.7% vs baseline',
       throughput: '410 u/hr',
-      cpu: '₹37.2',
-      travel: '1.2 km'
+      throughputDelta: '-5% vs baseline',
+      transit: '1.9 km',
+      transitDelta: '+8% distance',
+      status: 'Zone A (Bulk receiving): Slow-moving pallet reserves. Pallet travel remains high due to heavy forklift routing.'
     },
     'zone-b': {
-      status: 'ZONE B (PICKING CORRIDOR): High-velocity SKUs relocated to waist-level eye bays. Picker transit reduced by 34%.',
+      cpu: '₹37.2',
+      cpuDelta: '-18.2% vs baseline',
       throughput: '580 u/hr',
-      cpu: '₹35.8',
-      travel: '1.9 km'
+      throughputDelta: '+24% vs baseline',
+      transit: '1.2 km',
+      transitDelta: '-34% distance',
+      status: 'Zone B (Picking corridor): High-velocity SKUs relocated to waist-level eye bays. Picker transit reduced by 34%.'
     },
     'zone-c': {
-      status: 'ZONE C (AUTOMATED PACK & QC): Automated weigh-and-seal verification online. Packing queue latency down 28%.',
-      throughput: '520 u/hr',
-      cpu: '₹36.5',
-      travel: '0.8 km'
+      cpu: '₹39.5',
+      cpuDelta: '-13.2% vs baseline',
+      throughput: '510 u/hr',
+      throughputDelta: '+12% vs baseline',
+      transit: '1.5 km',
+      transitDelta: '-18% distance',
+      status: 'Zone C (Mezzanine bin-shelving): Medium-velocity items with gravity-fed chutes. Dispatch time stabilized.'
     },
     'zone-d': {
-      status: 'ZONE D (DISPATCH PORT): On-Time-In-Full (OTIF) dispatch velocity at 98.6%. Multi-zone vehicle routing optimized.',
-      throughput: '640 u/hr',
-      cpu: '₹34.1',
-      travel: '1.0 km'
+      cpu: '₹41.1',
+      cpuDelta: '-9.7% vs baseline',
+      throughput: '460 u/hr',
+      throughputDelta: '+2% vs baseline',
+      transit: '1.7 km',
+      transitDelta: '-6% distance',
+      status: 'Zone D (Value-added packaging): Bundling station. Transit overhead constrained by manual pack verification.'
     }
   };
 
-  zoneBtns.forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.preventDefault();
-      zoneBtns.forEach(b => {
-        b.classList.remove('active', 'btn-yellow');
-        b.classList.add('btn-white');
-      });
-      btn.classList.add('active', 'btn-yellow');
-      btn.classList.remove('btn-white');
+  const zoneButtons = document.querySelectorAll('.btn-zone');
+  const dashCpuMetric = document.getElementById('dashCpuMetric');
+  const dashThroughput = document.getElementById('dashThroughput');
+  const dashTravelMetric = document.getElementById('dashTravelMetric');
+  const zoneStatusMonitor = document.getElementById('zoneStatusMonitor');
+
+  zoneButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      zoneButtons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
 
       const zoneKey = btn.getAttribute('data-zone');
       const data = zoneData[zoneKey];
       if (data) {
-        if (zoneStatusText) zoneStatusText.textContent = data.status;
-        if (dashThroughput) dashThroughput.textContent = data.throughput;
         if (dashCpuMetric) dashCpuMetric.textContent = data.cpu;
-        if (dashTravelMetric) dashTravelMetric.textContent = data.travel;
-        playButtonPop(780);
-        showToast(`✓ ${btn.textContent.trim()} Selected!`);
+        if (dashThroughput) dashThroughput.textContent = data.throughput;
+        if (dashTravelMetric) dashTravelMetric.textContent = data.transit;
+        if (zoneStatusMonitor) zoneStatusMonitor.textContent = data.status;
       }
     });
   });
 
   // ------------------------------------------------------------------------
-  // 5. Project 2: Dark Store Inventory Slider
+  // 2. Interactive Simulator 2: Dark Store Inventory Holding (DIO Slider)
   // ------------------------------------------------------------------------
   const dioSlider = document.getElementById('dioRangeSlider');
-  const dioValueDisplay = document.getElementById('dioValDisplay');
-  const alertText = document.getElementById('alertDynamicText');
-  const spoilageMetric = document.getElementById('spoilageMetric');
+  const dioDisplay = document.getElementById('dioValDisplay');
   const stockoutMetric = document.getElementById('stockoutMetric');
+  const spoilageMetric = document.getElementById('spoilageMetric');
+  const alertDynamicText = document.getElementById('alertDynamicText');
 
   if (dioSlider) {
     dioSlider.addEventListener('input', (e) => {
       const val = parseInt(e.target.value, 10);
-      if (dioValueDisplay) dioValueDisplay.textContent = `${val} DAYS`;
-      playSliderTick(val);
+      if (dioDisplay) dioDisplay.textContent = `${val} days`;
 
       if (val <= 2) {
-        if (alertText) {
-          alertText.innerHTML = '🚨 <strong>CRITICAL STOCKOUT RISK:</strong> Automated PO Triggered! SKU velocity exceeds safety buffer.';
+        if (stockoutMetric) stockoutMetric.textContent = '+38%';
+        if (spoilageMetric) spoilageMetric.textContent = '-28%';
+        if (alertDynamicText) {
+          alertDynamicText.textContent = 'Critical stockout alert: Holding threshold too lean. Out-of-stock frequency elevated on daily essentials.';
         }
-        if (stockoutMetric) stockoutMetric.textContent = 'HIGH (PO SENT)';
-        if (spoilageMetric) spoilageMetric.textContent = '0% SPOILAGE';
-      } else if (val >= 12) {
-        if (alertText) {
-          alertText.innerHTML = '⚠️ <strong>DEADSTOCK ACCUMULATION:</strong> Holding costs climbing. Spoilage discount protocol triggered.';
-        }
-        if (stockoutMetric) stockoutMetric.textContent = '0% RISK';
-        if (spoilageMetric) spoilageMetric.textContent = '+18% SPOILAGE';
-      } else {
-        if (alertText) {
-          alertText.innerHTML = '🟢 <strong>OPTIMAL DARK STORE VELOCITY:</strong> Healthy turnover. Spoilage down 15%, stockouts cut 22%.';
-        }
+      } else if (val >= 3 && val <= 7) {
         if (stockoutMetric) stockoutMetric.textContent = '-22%';
         if (spoilageMetric) spoilageMetric.textContent = '-15%';
+        if (alertDynamicText) {
+          alertDynamicText.textContent = 'Optimal dark store velocity: Balanced inventory turnover. Spoilage down 15%, stockouts minimized by 22%.';
+        }
+      } else if (val >= 8 && val <= 13) {
+        if (stockoutMetric) stockoutMetric.textContent = '-28%';
+        if (spoilageMetric) spoilageMetric.textContent = '+18%';
+        if (alertDynamicText) {
+          alertDynamicText.textContent = 'Holding cost accumulation: Stockouts zeroed, but perishable inventory spoilage starts exceeding benchmark.';
+        }
+      } else {
+        if (stockoutMetric) stockoutMetric.textContent = '-32%';
+        if (spoilageMetric) spoilageMetric.textContent = '+45%';
+        if (alertDynamicText) {
+          alertDynamicText.textContent = 'Dead stock warning: High shelf-life expiration risk on dairy/fresh categories. Working capital tied up.';
+        }
       }
     });
   }
 
   // ------------------------------------------------------------------------
-  // 6. Project 3: Star Schema & SQL Runner
+  // 3. Interactive Simulator 3: Star Schema & SQL CTE Runner
   // ------------------------------------------------------------------------
-  const schemaNodes = document.querySelectorAll('.schema-btn');
-  const schemaDetails = document.getElementById('schemaDetails');
-
-  const nodeInfo = {
-    'fact': 'FACT_SALES_RETURNS: Central fact table with 200,000+ transactional rows. Measures: Revenue, Discount_Amt, Quantity, Profit.',
-    'dim1': 'DIM_CUSTOMER: 12,500+ Unique Accounts. Attributes: Customer_Key, Segment (Enterprise, SMB), Region_ID, Credit_Tier.',
-    'dim2': 'DIM_PRODUCT: 4,800 SKUs. Attributes: Product_Key, Category, Base_Margin_Pct, Unit_Cost, Manufacturer.',
-    'dim3': 'DIM_REGION: 8 Zones & 45 Territories. Attributes: Territory_Key, Regional_Director, Logistics_Hub_ID, Sales_Quota.',
-    'dim4': 'DIM_DATE: Complete Fiscal Temporal Matrix. Attributes: Date_Key, Day_Of_Week, Fiscal_Quarter, Holiday_Flag, YoY_Period.'
+  const schemaNodes = {
+    'dim1': 'Dim_Customer: Customer_SK, Customer_ID, Segment (B2B/B2C), Region_ID, Credit_Tier, Acquisition_Date.',
+    'dim2': 'Dim_Product: Product_SK, SKU_Code, Category, Sub_Category, Unit_Cost, Standard_Price, Vendor_ID.',
+    'fact': 'Fact_Sales_Returns: Central transactional fact table with 200,000+ rows. Measures: Revenue, Discount_Amt, Quantity, Net_Profit, Margin_Pct.',
+    'dim3': 'Dim_Region: Region_SK, Territory (East/West/North/South), Zone_Manager, Fulfilment_Hub, Tax_Bracket.',
+    'dim4': 'Dim_Date: Date_SK, Full_Date, Fiscal_Quarter, Fiscal_Year, Month_Name, Is_Peak_Seasonal_Flag.'
   };
 
-  schemaNodes.forEach(node => {
-    node.addEventListener('click', () => {
-      schemaNodes.forEach(n => n.classList.remove('active'));
-      node.classList.add('active');
+  const schemaButtons = document.querySelectorAll('.schema-btn');
+  const schemaDetails = document.getElementById('schemaDetails');
+  const btnRunSql = document.getElementById('btnRunSql');
+  const sqlTerminalOutput = document.getElementById('sqlTerminalOutput');
 
-      const key = node.getAttribute('data-node');
-      if (nodeInfo[key] && schemaDetails) {
-        schemaDetails.textContent = nodeInfo[key];
-        playButtonPop(740);
+  schemaButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      schemaButtons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const nodeKey = btn.getAttribute('data-node');
+      if (schemaDetails && schemaNodes[nodeKey]) {
+        schemaDetails.textContent = schemaNodes[nodeKey];
       }
     });
   });
 
-  const sqlRunBtn = document.getElementById('btnRunSql');
-  const sqlOutput = document.getElementById('sqlTerminalOutput');
-  if (sqlRunBtn && sqlOutput) {
-    sqlRunBtn.addEventListener('click', () => {
-      sqlRunBtn.textContent = '⏳ RUNNING...';
-      sqlOutput.innerHTML = '<span style="color:#38bdf8;">Executing Window Function (DENSE_RANK) across 200,000 rows...</span>';
-      playButtonPop(620);
-
+  if (btnRunSql && sqlTerminalOutput) {
+    btnRunSql.addEventListener('click', () => {
+      sqlTerminalOutput.textContent = 'Executing query across 200,000+ relational rows...\n\n-- Results:\n+------------+----------------+------------+-------------------+\n| Territory  | Total_Revenue  | Leak_Rank  | Est_Margin_Leak   |\n+------------+----------------+------------+-------------------+\n| East       | ₹4,820,150.00  | 1          | ₹1,850,200.00 (⚠️)|\n| North      | ₹3,910,400.00  | 2          | ₹620,100.00       |\n| West       | ₹3,240,800.00  | 3          | ₹410,500.00       |\n| South      | ₹2,880,100.00  | 4          | ₹210,000.00       |\n+------------+----------------+------------+-------------------+\n-- 4 rows in set (0.042 sec). Root cause: Discretionary B2B pricing overrides in East.';
+      btnRunSql.textContent = 'Query executed ✓';
       setTimeout(() => {
-        sqlOutput.innerHTML = `
-<span style="color:#00f5a0;">✓ QUERY SUCCESS (0.038s) | 200,000 ROWS SCANNED</span>
---------------------------------------------------------------
-Territory       Revenue (₹)   Margin Leakage  DENSE_RANK
---------------------------------------------------------------
-East_Enterprise ₹4.2 Cr       ₹8.4 Lakhs      1 (High Leak)
-South_Metro     ₹3.8 Cr       ₹5.6 Lakhs      2
-North_Retail    ₹2.9 Cr       ₹4.5 Lakhs      3
---------------------------------------------------------------
-Finding: Discretionary discounts in East Enterprise drove 45% of leakage.
-`;
-        sqlRunBtn.textContent = '▶ RUN SQL CTE';
-        playSuccessChime();
-        showToast('✓ SQL Query Execution Simulation Complete!');
-      }, 550);
+        btnRunSql.textContent = 'Execute query';
+      }, 4000);
     });
   }
 
   // ------------------------------------------------------------------------
-  // 7. Modals (Recruiter Fast Track & Resume Dossier)
+  // 4. Modal Dialogs (Recruiter Brief & Resume Dossier)
   // ------------------------------------------------------------------------
   const recruiterModal = document.getElementById('recruiterModal');
   const resumeModal = document.getElementById('resumeModal');
+  const mobileDrawer = document.getElementById('mobileDrawer');
   const openRecruiterBtns = document.querySelectorAll('.open-recruiter-modal');
   const openResumeBtns = document.querySelectorAll('.open-resume-modal');
-  const closeModalBtns = document.querySelectorAll('.nb-close-btn');
+  const closeBtns = document.querySelectorAll('.btn-close');
+
+  function openModal(modal) {
+    if (!modal) return;
+    if (mobileDrawer) mobileDrawer.classList.remove('active', 'open');
+    modal.classList.add('active', 'open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal(modal) {
+    if (!modal) return;
+    modal.classList.remove('active', 'open');
+    if (!document.querySelector('.modal-backdrop.active, .modal-backdrop.open')) {
+      document.body.style.overflow = '';
+    }
+  }
 
   openRecruiterBtns.forEach(btn => {
     btn.addEventListener('click', (e) => {
       e.preventDefault();
-      if (mobileDrawer) mobileDrawer.classList.remove('open', 'active');
-      if (recruiterModal) {
-        recruiterModal.classList.add('active');
-        playSuccessChime();
-      }
+      openModal(recruiterModal);
     });
   });
 
   openResumeBtns.forEach(btn => {
     btn.addEventListener('click', (e) => {
       e.preventDefault();
-      if (mobileDrawer) mobileDrawer.classList.remove('open', 'active');
-      if (resumeModal) {
-        resumeModal.classList.add('active');
-        playSuccessChime();
-      }
+      openModal(resumeModal);
     });
   });
 
-  closeModalBtns.forEach(btn => {
+  closeBtns.forEach(btn => {
     btn.addEventListener('click', () => {
-      if (recruiterModal) recruiterModal.classList.remove('active');
-      if (resumeModal) resumeModal.classList.remove('active');
-      playButtonPop(420);
+      const parentModal = btn.closest('.modal-backdrop');
+      if (parentModal) closeModal(parentModal);
     });
   });
 
-  [recruiterModal, resumeModal].forEach(modal => {
-    if (modal) {
-      modal.addEventListener('click', (e) => {
-        if (e.target === modal) {
-          modal.classList.remove('active');
-        }
-      });
+  [recruiterModal, resumeModal, mobileDrawer].forEach(modal => {
+    if (!modal) return;
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeModal(modal);
+    });
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      [recruiterModal, resumeModal, mobileDrawer].forEach(m => closeModal(m));
     }
   });
 
   // ------------------------------------------------------------------------
-  // 8. 1-Click Clipboard Copies
+  // 5. Mobile Drawer Menu
   // ------------------------------------------------------------------------
-  document.querySelectorAll('.copy-trigger').forEach(trigger => {
-    trigger.addEventListener('click', () => {
-      const textToCopy = trigger.getAttribute('data-copy');
-      if (textToCopy) {
-        navigator.clipboard.writeText(textToCopy).then(() => {
-          playSuccessChime();
-          showToast(`✓ Copied "${textToCopy}" to clipboard!`);
+  const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+  const closeDrawerBtn = document.getElementById('closeDrawerBtn');
+  const drawerLinks = document.querySelectorAll('.drawer-link');
+
+  if (mobileMenuBtn && mobileDrawer) {
+    mobileMenuBtn.addEventListener('click', () => {
+      openModal(mobileDrawer);
+    });
+  }
+
+  if (closeDrawerBtn && mobileDrawer) {
+    closeDrawerBtn.addEventListener('click', () => {
+      closeModal(mobileDrawer);
+    });
+  }
+
+  drawerLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      closeModal(mobileDrawer);
+    });
+  });
+
+  // ------------------------------------------------------------------------
+  // 6. Clipboard Copy Trigger with Toast Notice
+  // ------------------------------------------------------------------------
+  const copyTriggers = document.querySelectorAll('.copy-trigger');
+  const toast = document.getElementById('nbToast');
+  let toastTimer = null;
+
+  function showToast(msg) {
+    if (!toast) return;
+    toast.textContent = msg;
+    toast.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => {
+      toast.classList.remove('show');
+    }, 2500);
+  }
+
+  copyTriggers.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const copyVal = btn.getAttribute('data-copy');
+      if (copyVal) {
+        navigator.clipboard.writeText(copyVal).then(() => {
+          showToast(`Copied to clipboard: ${copyVal}`);
         }).catch(() => {
-          showToast(`Copied: ${textToCopy}`);
+          showToast('Copied to clipboard');
         });
       }
     });
   });
 
   // ------------------------------------------------------------------------
-  // 9. Toast Helper
-  // ------------------------------------------------------------------------
-  const toast = document.getElementById('nbToast');
-  let toastTimer = null;
-
-  function showToast(message) {
-    if (!toast) return;
-    toast.textContent = message;
-    toast.classList.add('show');
-    clearTimeout(toastTimer);
-    toastTimer = setTimeout(() => {
-      toast.classList.remove('show');
-    }, 3000);
-  }
-
-  // ------------------------------------------------------------------------
-  // 10. Mobile Navigation Drawer
-  // ------------------------------------------------------------------------
-  const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-  const closeDrawerBtn = document.getElementById('closeDrawerBtn');
-  const mobileDrawer = document.getElementById('mobileDrawer');
-  const drawerLinks = document.querySelectorAll('.drawer-link');
-
-  if (mobileMenuBtn && mobileDrawer) {
-    mobileMenuBtn.addEventListener('click', () => {
-      mobileDrawer.classList.add('open', 'active');
-      playButtonPop(520);
-    });
-  }
-
-  if (closeDrawerBtn && mobileDrawer) {
-    closeDrawerBtn.addEventListener('click', () => {
-      mobileDrawer.classList.remove('open', 'active');
-      playButtonPop(400);
-    });
-  }
-
-  drawerLinks.forEach(link => {
-    link.addEventListener('click', () => {
-      if (mobileDrawer) mobileDrawer.classList.remove('open', 'active');
-    });
-  });
-
-  // ------------------------------------------------------------------------
-  // 11. Print Resume
+  // 7. Print Resume Trigger
   // ------------------------------------------------------------------------
   const printResumeBtn = document.getElementById('btnPrintResume');
   if (printResumeBtn) {
@@ -485,4 +272,5 @@ Finding: Discretionary discounts in East Enterprise drove 45% of leakage.
       window.print();
     });
   }
+
 });
