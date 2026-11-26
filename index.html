@@ -4,64 +4,70 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Subhajit Mondal — Business & Data Analyst</title>
-  <meta name="description" content="Portfolio of Subhajit Mondal — Business & Data Analyst specializing in supply chain logistics optimization, relational SQL modeling, and interactive Power BI decision systems.">
+  <meta name="description" content="Portfolio of Subhajit Mondal, Business and Data Analyst specializing in supply chain logistics optimization, relational SQL modeling, and interactive Power BI decision systems.">
   
   <!-- Open Graph / Social Sharing -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://notyourrevenn.github.io/Subhajit-Portfolio/">
   <meta property="og:title" content="Subhajit Mondal — Business & Data Analyst">
-  <meta property="og:description" content="Business & Data Analyst (B.Tech CSE + MBA Analytics). Modeled ₹94.5L in logistics cost savings, reduced CPU by 18.2%, and engineered relational data models.">
+  <meta property="og:description" content="Business and Data Analyst (B.Tech CSE + MBA Analytics). Modeled ₹94.5L in logistics cost savings, reduced CPU by 18.2%, and engineered relational data models.">
   <meta property="og:image" content="https://notyourrevenn.github.io/Subhajit-Portfolio/assets/profile.jpg">
 
   <!-- Twitter Meta -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Subhajit Mondal — Business & Data Analyst">
-  <meta name="twitter:description" content="Business & Data Analyst (B.Tech CSE + MBA Analytics). Modeled ₹94.5L in logistics cost savings, reduced CPU by 18.2%, and engineered relational data models.">
+  <meta name="twitter:description" content="Business and Data Analyst (B.Tech CSE + MBA Analytics). Modeled ₹94.5L in logistics cost savings, reduced CPU by 18.2%, and engineered relational data models.">
   <meta name="twitter:image" content="https://notyourrevenn.github.io/Subhajit-Portfolio/assets/profile.jpg">
   
-  <!-- Typography: Plus Jakarta Sans + JetBrains Mono -->
+  <!-- Typography: Manrope + Geist Mono (B1 Rule: Geist/Manrope only, no Inter/Roboto/Arial) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
   
+  <!-- Three.js Library for 3D Interactive Hero Canvas -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
   <!-- ======================================================================
-       HEADER & NAVIGATION (QUIET CHROME)
+       B7. FLOATING TRANSLUCENT NAVIGATION
        ====================================================================== -->
   <header class="site-header">
-    <div class="container header-container">
-      <a href="#overview" class="brand-link">
-        <span class="brand-name">Subhajit Mondal</span>
-        <span class="brand-meta">Analytics</span>
-      </a>
+    <div class="container">
+      <div class="header-container">
+        <a href="#overview" class="brand-link">
+          <span class="brand-name">Subhajit Mondal</span>
+          <span class="brand-meta">Analytics</span>
+        </a>
 
-      <nav class="desktop-nav" aria-label="Main Navigation">
-        <ul class="nav-list">
-          <li><a href="#overview">Overview</a></li>
-          <li><a href="#projects">Case studies</a></li>
-          <li><a href="#skills">Toolkit</a></li>
-          <li><a href="#experience">Experience</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </nav>
+        <nav class="desktop-nav" aria-label="Main Navigation">
+          <ul class="nav-list">
+            <li><a href="#overview">Overview</a></li>
+            <li><a href="#philosophy">Philosophy</a></li>
+            <li><a href="#projects">Case studies</a></li>
+            <li><a href="#skills">Toolkit</a></li>
+            <li><a href="#experience">Track record</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </nav>
 
-      <div class="header-actions">
-        <button type="button" class="btn btn-secondary btn-sm open-recruiter-modal">
-          Recruiter brief
-        </button>
-        <button type="button" class="btn btn-primary btn-sm open-resume-modal">
-          View resume
-        </button>
-        <button type="button" class="mobile-toggle" id="mobileMenuBtn" aria-label="Toggle navigation menu">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="3" y1="12" x2="21" y2="12"></line>
-            <line x1="3" y1="6" x2="21" y2="6"></line>
-            <line x1="3" y1="18" x2="21" y2="18"></line>
-          </svg>
-        </button>
+        <div class="header-actions">
+          <button type="button" class="btn btn-secondary btn-sm open-recruiter-modal">
+            Recruiter brief
+          </button>
+          <button type="button" class="btn btn-primary btn-sm open-resume-modal">
+            View resume
+          </button>
+          <button type="button" class="mobile-toggle" id="mobileMenuBtn" aria-label="Toggle navigation menu">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          </button>
+        </div>
       </div>
     </div>
   </header>
@@ -75,9 +81,10 @@
       </div>
       <div class="drawer-body">
         <a href="#overview" class="drawer-link">Overview</a>
+        <a href="#philosophy" class="drawer-link">Philosophy</a>
         <a href="#projects" class="drawer-link">Case studies</a>
         <a href="#skills" class="drawer-link">Technical toolkit</a>
-        <a href="#experience" class="drawer-link">Career & education</a>
+        <a href="#experience" class="drawer-link">Career and education</a>
         <a href="#contact" class="drawer-link">Contact</a>
         <div class="drawer-actions">
           <button type="button" class="btn btn-secondary open-recruiter-modal" style="width:100%;">
@@ -94,24 +101,24 @@
   <main class="container" id="overview">
     
     <!-- ======================================================================
-         HERO SECTION: FOCUSED VALUE & VERIFIED PORTRAIT
+         HERO SECTION: 3D INTERACTIVE DATA CORE & CRISP VALUE
          ====================================================================== -->
     <section class="hero-section">
       <div class="hero-grid">
         
-        <!-- Left: Crisp Value Proposition -->
+        <!-- Left: Crisp Value Proposition with B5 Text Gradient -->
         <div class="hero-content">
           <div class="status-indicator">
             <span class="status-dot"></span>
-            <span>Available for Business Analyst & Data Analyst roles • Immediate</span>
+            <span>Immediate availability • Business and Data Analyst</span>
           </div>
 
-          <h1 class="hero-headline">
+          <h1 class="hero-headline heading-1 text-gradient-hero">
             Turning complex supply chain operations into measurable cost reductions.
           </h1>
 
-          <p class="hero-description">
-            Business and Data Analyst combining a B.Tech in Computer Science with an MBA in Business Analytics. Experienced in warehouse productivity modeling, inventory turnover analytics, and production-grade Power BI systems.
+          <p class="hero-description body-2">
+            Business and Data Analyst combining a B.Tech in Computer Science with an MBA in Business Analytics. Experienced in warehouse productivity modeling, inventory turnover analytics, and production grade Power BI decision systems.
           </p>
 
           <div class="hero-actions">
@@ -134,30 +141,32 @@
             <div class="meta-separator"></div>
             <div class="meta-item">
               <span class="meta-label">Primary focus</span>
-              <span class="meta-value">Supply Chain & Relational BI</span>
+              <span class="meta-value">Supply Chain and Relational BI</span>
             </div>
             <div class="meta-separator"></div>
             <div class="meta-item">
               <span class="meta-label">Location preference</span>
-              <span class="meta-value">Kolkata / Pan-India / Remote</span>
+              <span class="meta-value">Kolkata, Pan India, or Remote</span>
             </div>
           </div>
         </div>
 
-        <!-- Right: Studio Portrait in Clean Hairline Frame -->
+        <!-- Right: 3D Interactive WebGL Data Core -->
         <div class="hero-visual">
-          <div class="portrait-card">
-            <div class="portrait-frame">
-              <img id="profilePhotoImg" src="assets/profile.jpg?v=4" alt="Subhajit Mondal, Business & Data Analyst" class="portrait-image" onerror="this.onerror=null; this.src='assets/headshot_tech.jpg';">
+          <div class="hero-3d-wrapper" id="hero3dWrapper">
+            <div class="canvas-container">
+              <canvas id="hero3dCanvas" aria-label="Interactive 3D Supply Chain Data Core"></canvas>
+              <div class="canvas-hint">Drag or move cursor to inspect 3D data core</div>
             </div>
-            <div class="portrait-details">
-              <div class="portrait-meta">
-                <span class="portrait-name">Subhajit Mondal</span>
-                <span class="portrait-role">Business & Data Analyst</span>
+            
+            <!-- Floating 3D Portrait Glass Badge -->
+            <div class="portrait-badge-3d" id="portraitBadge3d">
+              <div class="portrait-frame">
+                <img id="profilePhotoImg" src="assets/profile.jpg?v=5" alt="Subhajit Mondal, Business and Data Analyst" class="portrait-image" onerror="this.onerror=null; this.src='assets/headshot_tech.jpg';">
               </div>
-              <div class="portrait-tags">
-                <span class="badge">B.Tech 74%</span>
-                <span class="badge">MBA 71%</span>
+              <div class="portrait-info">
+                <span class="portrait-name">Subhajit Mondal</span>
+                <span class="portrait-role">B.Tech CSE + MBA Analytics</span>
               </div>
             </div>
           </div>
@@ -167,11 +176,11 @@
     </section>
 
     <!-- ======================================================================
-         KEY PERFORMANCE BENCHMARKS (4 CARDS)
+         KEY PERFORMANCE BENCHMARKS (4 CARDS WITH 3D PERSPECTIVE TILT)
          ====================================================================== -->
     <section class="section-block">
       <div class="kpi-grid">
-        <div class="kpi-card">
+        <div class="kpi-card card-3d">
           <div class="kpi-header">
             <span class="kpi-title">Projected logistics savings</span>
             <span class="kpi-delta positive">ROI model</span>
@@ -180,25 +189,25 @@
           <p class="kpi-caption">Modeled annual savings from warehouse slotting and picker transit reduction</p>
         </div>
 
-        <div class="kpi-card">
+        <div class="kpi-card card-3d">
           <div class="kpi-header">
             <span class="kpi-title">Cost per unit (CPU)</span>
             <span class="kpi-delta positive">-18.2%</span>
           </div>
           <div class="kpi-number">₹37.2</div>
-          <p class="kpi-caption">Reduced from baseline ₹45.5 to ₹37.2 per unit across high-velocity corridors</p>
+          <p class="kpi-caption">Reduced from baseline ₹45.5 to ₹37.2 per unit across high velocity corridors</p>
         </div>
 
-        <div class="kpi-card">
+        <div class="kpi-card card-3d">
           <div class="kpi-header">
             <span class="kpi-title">Structured transactions</span>
             <span class="kpi-delta">Enterprise data</span>
           </div>
           <div class="kpi-number">200K+</div>
-          <p class="kpi-caption">Modeled into relational 1 Fact : 4 Dimensions Star Schema architecture</p>
+          <p class="kpi-caption">Modeled into relational 1 Fact to 4 Dimensions Star Schema architecture</p>
         </div>
 
-        <div class="kpi-card">
+        <div class="kpi-card card-3d">
           <div class="kpi-header">
             <span class="kpi-title">Reporting cycle time</span>
             <span class="kpi-delta positive">-40%</span>
@@ -210,46 +219,60 @@
     </section>
 
     <!-- ======================================================================
+         B11. MANDATORY TAGLINE REVEAL SECTION
+         ====================================================================== -->
+    <section id="philosophy" class="tagline-reveal-section" aria-label="Analytical Philosophy">
+      <div class="container">
+        <div class="tagline-inner">
+          <span class="tagline-kicker">Analytical Philosophy</span>
+          <blockquote class="tagline-text" id="taglineBlock">
+            Turning fragmented warehouse transactions into predictable margin growth. Every query engineered to eliminate operational waste and quantify bottom line impact.
+          </blockquote>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
          FEATURED CASE STUDIES & INTERACTIVE DECISION LABS
          ====================================================================== -->
     <section id="projects" class="section-block">
       <div class="section-header">
         <span class="section-badge">Case studies</span>
         <h2 class="section-title">Quantitative projects with proven business impact</h2>
-        <p class="section-subtitle">Real-world operational analysis paired with interactive decision models.</p>
+        <p class="section-subtitle">Real world operational analysis paired with interactive decision models.</p>
       </div>
 
       <div class="projects-container">
         
         <!-- CASE STUDY 1: WAREHOUSE CPU -->
-        <article class="project-item">
+        <article class="project-item card-3d">
           <div class="project-narrative">
             <div class="project-tag-row">
-              <span class="badge">Logistics & warehousing</span>
+              <span class="badge">Logistics and warehousing</span>
               <span class="badge">Cost optimization</span>
             </div>
             
-            <h3 class="project-heading">Warehouse Productivity & Cost-per-Unit (CPU) Optimization</h3>
+            <h3 class="project-heading">Warehouse Productivity and Cost per Unit Optimization</h3>
             
             <div class="project-chips">
               <span class="chip">Power BI</span>
               <span class="chip">Advanced Excel</span>
               <span class="chip">SQL Queries</span>
-              <span class="chip">5-Why RCA</span>
+              <span class="chip">5 Why Root Cause Analysis</span>
             </div>
 
             <div class="case-steps">
               <div class="step-card">
                 <span class="step-label problem">Problem</span>
-                <p>Elevated CPU of ₹45.5/unit driven by transit congestion, excessive picker travel distance, and unoptimized SKU rack placement.</p>
+                <p>Elevated CPU of ₹45.5 per unit driven by transit congestion, excessive picker travel distance, and unoptimized SKU rack placement.</p>
               </div>
               <div class="step-card">
                 <span class="step-label solution">Analysis</span>
-                <p>Applied 5-Why root cause analysis on dispatch logs; developed Power BI velocity models reallocating fast-moving SKUs to waist-level bays.</p>
+                <p>Applied 5 Why root cause analysis on dispatch logs; developed Power BI velocity models reallocating fast moving SKUs to waist level bays.</p>
               </div>
               <div class="step-card">
                 <span class="step-label outcome">Outcome</span>
-                <p>Reduced CPU by 18.2% (to ₹37.2/unit) and modeled ₹94.5 Lakhs in annual cost savings across operational shifts.</p>
+                <p>Reduced CPU by 18.2% (to ₹37.2 per unit) and modeled ₹94.5 Lakhs in annual cost savings across operational shifts.</p>
               </div>
             </div>
           </div>
@@ -288,21 +311,21 @@
                 <button type="button" class="seg-btn btn-zone" data-zone="zone-d">Zone D</button>
               </div>
               <div class="readout-box" id="zoneStatusMonitor">
-                Zone B (Picking corridor): High-velocity SKUs relocated to waist-level eye bays. Picker transit reduced by 34%.
+                Zone B (Picking corridor): High velocity SKUs relocated to waist level eye bays. Picker transit reduced by 34%.
               </div>
             </div>
           </div>
         </article>
 
         <!-- CASE STUDY 2: DARK STORE INVENTORY -->
-        <article class="project-item">
+        <article class="project-item card-3d">
           <div class="project-narrative">
             <div class="project-tag-row">
               <span class="badge">Quick commerce</span>
               <span class="badge">Inventory analytics</span>
             </div>
 
-            <h3 class="project-heading">Dark Store Inventory Turnover & Safety Stock Analytics</h3>
+            <h3 class="project-heading">Dark Store Inventory Turnover and Safety Stock Analytics</h3>
             
             <div class="project-chips">
               <span class="chip">Power BI</span>
@@ -314,7 +337,7 @@
             <div class="case-steps">
               <div class="step-card">
                 <span class="step-label problem">Problem</span>
-                <p>Severe stockout risks on top-100 high-velocity essentials combined with costly spoilage in short-shelf-life perishables.</p>
+                <p>Severe stockout risks on top 100 high velocity essentials combined with costly spoilage in short shelf life perishables.</p>
               </div>
               <div class="step-card">
                 <span class="step-label solution">Analysis</span>
@@ -359,8 +382,8 @@
               </div>
               <input type="range" min="1" max="18" value="5" class="range-slider" id="dioRangeSlider">
               <div class="slider-scale">
-                <span>1–2 days (Stockout risk)</span>
-                <span>5–7 days (Optimal target)</span>
+                <span>1 to 2 days (Stockout risk)</span>
+                <span>5 to 7 days (Optimal target)</span>
                 <span>15+ days (Dead stock)</span>
               </div>
               <div class="readout-box" id="alertDynamicText">
@@ -371,14 +394,14 @@
         </article>
 
         <!-- CASE STUDY 3: ENTERPRISE SALES MARGIN -->
-        <article class="project-item">
+        <article class="project-item card-3d">
           <div class="project-narrative">
             <div class="project-tag-row">
               <span class="badge">Financial intelligence</span>
               <span class="badge">Dimensional modeling</span>
             </div>
 
-            <h3 class="project-heading">Enterprise Sales Margin Intelligence & Star Schema Architecture</h3>
+            <h3 class="project-heading">Enterprise Sales Margin Intelligence and Star Schema Architecture</h3>
             
             <div class="project-chips">
               <span class="chip">MySQL</span>
@@ -394,7 +417,7 @@
               </div>
               <div class="step-card">
                 <span class="step-label solution">Analysis</span>
-                <p>Designed a clean 1 Fact : 4 Dimensions Star Schema; authored SQL Common Table Expressions and Window Functions (DENSE_RANK, LAG).</p>
+                <p>Designed a clean 1 Fact to 4 Dimensions Star Schema; authored SQL Common Table Expressions and Window Functions (DENSE_RANK, LAG).</p>
               </div>
               <div class="step-card">
                 <span class="step-label outcome">Outcome</span>
@@ -406,7 +429,7 @@
           <!-- Interactive Simulator 3 -->
           <div class="project-sandbox">
             <div class="sandbox-header">
-              <span class="sandbox-title">Relational Schema & SQL Workbench</span>
+              <span class="sandbox-title">Relational Schema and SQL Workbench</span>
               <button type="button" class="btn btn-secondary btn-xs" id="btnRunSql">Execute query</button>
             </div>
 
@@ -443,31 +466,31 @@
     <section id="skills" class="section-block">
       <div class="section-header">
         <span class="section-badge">Toolkit</span>
-        <h2 class="section-title">Technical capabilities & methods</h2>
+        <h2 class="section-title">Technical capabilities and methods</h2>
         <p class="section-subtitle">Core analytical tools applied to enterprise data problems.</p>
       </div>
 
       <div class="skills-layout">
-        <div class="skill-card">
+        <div class="skill-card card-3d">
           <div class="skill-meta">
             <span class="skill-category">Relational databases</span>
-            <h3 class="skill-name">SQL & Data Warehousing</h3>
+            <h3 class="skill-name">SQL and Data Warehousing</h3>
           </div>
           <div class="pill-cloud">
             <span class="tag">MySQL</span>
             <span class="tag">PostgreSQL</span>
             <span class="tag">Window Functions</span>
             <span class="tag">Common Table Expressions</span>
-            <span class="tag">Multi-Table Joins</span>
+            <span class="tag">Multi Table Joins</span>
             <span class="tag">Database Views</span>
             <span class="tag">Data Hygiene</span>
           </div>
         </div>
 
-        <div class="skill-card">
+        <div class="skill-card card-3d">
           <div class="skill-meta">
             <span class="skill-category">Business intelligence</span>
-            <h3 class="skill-name">Power BI & Visualization</h3>
+            <h3 class="skill-name">Power BI and Visualization</h3>
           </div>
           <div class="pill-cloud">
             <span class="tag">Power BI Desktop</span>
@@ -479,9 +502,9 @@
           </div>
         </div>
 
-        <div class="skill-card">
+        <div class="skill-card card-3d">
           <div class="skill-meta">
-            <span class="skill-category">Financial & quantitative modeling</span>
+            <span class="skill-category">Financial and quantitative modeling</span>
             <h3 class="skill-name">Advanced Spreadsheets</h3>
           </div>
           <div class="pill-cloud">
@@ -489,21 +512,21 @@
             <span class="tag">XLOOKUP</span>
             <span class="tag">INDEX / MATCH</span>
             <span class="tag">Power Pivot</span>
-            <span class="tag">What-If Analysis</span>
+            <span class="tag">What If Analysis</span>
             <span class="tag">Pivot Tables</span>
           </div>
         </div>
 
-        <div class="skill-card">
+        <div class="skill-card card-3d">
           <div class="skill-meta">
             <span class="skill-category">Operational frameworks</span>
-            <h3 class="skill-name">Supply Chain & Business Analysis</h3>
+            <h3 class="skill-name">Supply Chain and Business Analysis</h3>
           </div>
           <div class="pill-cloud">
             <span class="tag">SCM Metrics (DIO, CPU, OTIF)</span>
-            <span class="tag">5-Why Root Cause Analysis</span>
+            <span class="tag">5 Why Root Cause Analysis</span>
             <span class="tag">Exploratory Data Analysis</span>
-            <span class="tag">BRD & Documentation</span>
+            <span class="tag">BRD and Documentation</span>
             <span class="tag">Safety Stock Optimization</span>
           </div>
         </div>
@@ -516,18 +539,18 @@
     <section id="experience" class="section-block">
       <div class="section-header">
         <span class="section-badge">Track record</span>
-        <h2 class="section-title">Professional experience & education</h2>
+        <h2 class="section-title">Professional experience and education</h2>
       </div>
 
       <div class="timeline-layout">
         <!-- Professional Experience -->
-        <div class="record-card">
+        <div class="record-card card-3d">
           <div class="record-header">
             <div>
               <h3 class="record-role">Data Analyst Trainee</h3>
-              <div class="record-company">StarApp Solutions • Kolkata / Remote</div>
+              <div class="record-company">StarApp Solutions • Kolkata and Remote</div>
             </div>
-            <span class="record-date">May 2025 – Oct 2025</span>
+            <span class="record-date">May 2025 to Oct 2025</span>
           </div>
 
           <ul class="bullet-list">
@@ -539,22 +562,22 @@
           <div class="certifications-box">
             <span class="cert-title">Verified Certifications</span>
             <div class="cert-list">
-              <span class="cert-item">IIT Kanpur — Excel & Power BI</span>
-              <span class="cert-item">IBM — Business Intelligence Specialist</span>
-              <span class="cert-item">IBM — Relational Databases & SQL</span>
+              <span class="cert-item">IIT Kanpur: Advanced Excel and Power BI</span>
+              <span class="cert-item">IBM: Business Intelligence Specialist</span>
+              <span class="cert-item">IBM: Relational Databases and SQL</span>
             </div>
           </div>
         </div>
 
         <!-- Academic Foundation -->
-        <div class="record-card">
+        <div class="record-card card-3d">
           <div class="academic-entry">
             <div class="record-header">
               <div>
-                <h3 class="record-role">MBA in Business Analytics & Data Science</h3>
+                <h3 class="record-role">MBA in Business Analytics and Data Science</h3>
                 <div class="record-company">Bengal Institute of Business Studies (Vidyasagar University)</div>
               </div>
-              <span class="record-date">2024 – 2026 | 71%</span>
+              <span class="record-date">2024 to 2026 | 71%</span>
             </div>
             <p class="record-desc">Specialized in Supply Chain Analytics, Advanced BI, Relational Database Modeling, and Business Strategy.</p>
           </div>
@@ -565,20 +588,20 @@
                 <h3 class="record-role">B.Tech in Computer Science and Engineering</h3>
                 <div class="record-company">Templecity Institute of Technology (BPUT)</div>
               </div>
-              <span class="record-date">2019 – 2023 | 74%</span>
+              <span class="record-date">2019 to 2023 | 74%</span>
             </div>
-            <p class="record-desc">Core focus in DBMS, SQL Architecture, Object-Oriented Systems, and Algorithmic Analysis.</p>
+            <p class="record-desc">Core focus in DBMS, SQL Architecture, Object Oriented Systems, and Algorithmic Analysis.</p>
           </div>
 
           <div class="academic-entry divider-top">
             <div class="record-header">
               <div>
-                <h3 class="record-role">Vice-President, Media Club</h3>
-                <div class="record-company">Campus Operations & Leadership</div>
+                <h3 class="record-role">Vice President, Media Club</h3>
+                <div class="record-company">Campus Operations and Leadership</div>
               </div>
               <span class="record-date">5+ major events</span>
             </div>
-            <p class="record-desc">Led a 10-member team responsible for budget tracking, cross-department scheduling, and campus event operations.</p>
+            <p class="record-desc">Led a 10 member team responsible for budget tracking, cross department scheduling, and campus event operations.</p>
           </div>
         </div>
       </div>
@@ -588,12 +611,12 @@
          CONTACT & INVITATION TO CONNECT
          ====================================================================== -->
     <footer id="contact" class="site-footer">
-      <div class="footer-card">
+      <div class="footer-card card-3d">
         <div class="footer-content">
           <span class="footer-badge">Career discussion</span>
           <h2 class="footer-headline">Looking for a quantitative analyst who delivers?</h2>
           <p class="footer-subtext">
-            Actively interviewing for Business Analyst, Data Analyst, and Operations Analytics roles. Open to Kolkata, Pan-India, and remote positions.
+            Actively interviewing for Business Analyst, Data Analyst, and Operations Analytics roles. Open to Kolkata, Pan India, and remote positions.
           </p>
 
           <div class="contact-actions">
@@ -617,7 +640,7 @@
               GitHub: NotyourRevenn
             </a>
             <span class="dot-separator">•</span>
-            <span>Durgapur & Kolkata, West Bengal</span>
+            <span>Durgapur and Kolkata, West Bengal</span>
           </div>
 
           <div class="copyright-text">
@@ -635,14 +658,14 @@
   <div class="modal-backdrop" id="recruiterModal" role="dialog" aria-modal="true" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-header">
-        <h3 class="modal-title">Executive 30-Second Summary</h3>
+        <h3 class="modal-title">Executive 30 Second Summary</h3>
         <button type="button" class="btn-close" aria-label="Close modal">&times;</button>
       </div>
       <div class="modal-body">
         <div class="brief-card">
           <h4 class="brief-title">Core Candidate Profile</h4>
           <p class="brief-text">
-            Subhajit Mondal pairs a rigorous <strong>B.Tech in Computer Science</strong> with an <strong>MBA in Business Analytics</strong>. Hands-on experience modeling <strong>₹94.5 Lakhs in logistics cost savings</strong>, cutting warehouse Cost-per-Unit by 18.2%, and uncovering <strong>₹18.5 Lakhs in regional margin leakage</strong> using relational Star Schema architecture and advanced SQL Window Functions.
+            Subhajit Mondal pairs a rigorous <strong>B.Tech in Computer Science</strong> with an <strong>MBA in Business Analytics</strong>. Hands on experience modeling <strong>₹94.5 Lakhs in logistics cost savings</strong>, cutting warehouse Cost per Unit by 18.2%, and uncovering <strong>₹18.5 Lakhs in regional margin leakage</strong> using relational Star Schema architecture and advanced SQL Window Functions.
           </p>
         </div>
 
@@ -657,7 +680,7 @@
           </div>
           <div class="fact-card">
             <span class="fact-label">Preferred location</span>
-            <span class="fact-val">Kolkata / Pan-India / Remote</span>
+            <span class="fact-val">Kolkata / Pan India / Remote</span>
           </div>
           <div class="fact-card">
             <span class="fact-label">Core toolkit</span>
@@ -696,7 +719,7 @@
         <div class="resume-top">
           <h2 class="resume-name">Subhajit Mondal</h2>
           <div class="resume-contact-line">
-            Durgapur, West Bengal • +91-6295716179 • mondalsubhajit556@gmail.com
+            Durgapur, West Bengal • +91 6295716179 • mondalsubhajit556@gmail.com
           </div>
           <div class="resume-links-line">
             LinkedIn: linkedin.com/in/subhajit-mondal-analytics • GitHub: github.com/NotyourRevenn
@@ -706,7 +729,7 @@
         <div class="resume-section">
           <h4 class="resume-section-title">Professional Summary</h4>
           <p class="resume-text">
-            Business and Data Analyst combining a B.Tech in Computer Science with an MBA in Business Analytics. Hands-on experience in relational database querying, business process mapping, and designing 10+ production-grade interactive Power BI and Excel dashboards. Proven ability to translate complex operational data into high-impact business decisions—including modeling ₹94.5 Lakhs in annual logistics savings.
+            Business and Data Analyst combining a B.Tech in Computer Science with an MBA in Business Analytics. Hands on experience in relational database querying, business process mapping, and designing 10+ production grade interactive Power BI and Excel dashboards. Proven ability to translate complex operational data into high impact business decisions, including modeling ₹94.5 Lakhs in annual logistics savings.
           </p>
         </div>
 
@@ -714,7 +737,7 @@
           <h4 class="resume-section-title">Work Experience</h4>
           <div class="resume-item-header">
             <span class="resume-role-title">StarApp Solutions — Data Analyst Trainee</span>
-            <span class="resume-period">May 2025 – Oct 2025</span>
+            <span class="resume-period">May 2025 to Oct 2025</span>
           </div>
           <div class="resume-subinfo">Kolkata / Remote</div>
           <ul class="resume-bullets">
@@ -728,28 +751,28 @@
         <div class="resume-section">
           <h4 class="resume-section-title">Key Projects</h4>
           <div class="resume-project-item">
-            <strong>Warehouse Productivity & Cost-per-Unit (CPU) Optimization:</strong> Modeled ₹94.5L annual savings; slashed CPU from ₹45.5 to ₹37.2 (-18.2%) with 5-Why root cause analysis.
+            <strong>Warehouse Productivity and Cost per Unit Optimization:</strong> Modeled ₹94.5L annual savings; slashed CPU from ₹45.5 to ₹37.2 (-18.2%) with 5 Why root cause analysis.
           </div>
           <div class="resume-project-item">
             <strong>Dark Store Inventory Optimization:</strong> Modeled SKU demand patterns and automated DAX for DIO, cutting stockout risk by 22% and spoilage by 15%.
           </div>
           <div class="resume-project-item">
-            <strong>Enterprise Sales Margin Intelligence:</strong> Structured 200,000+ sales records into a 1 Fact : 4 Dimensions Star Schema with SQL Window Functions, uncovering ₹18.5L in margin leakage.
+            <strong>Enterprise Sales Margin Intelligence:</strong> Structured 200,000+ sales records into a 1 Fact to 4 Dimensions Star Schema with SQL Window Functions, uncovering ₹18.5L in margin leakage.
           </div>
         </div>
 
         <div class="resume-section">
           <h4 class="resume-section-title">Education</h4>
           <p class="resume-text">
-            <strong>MBA in Business Analytics & Data Science:</strong> Bengal Institute of Business Studies (2024–2026 | 71%)<br>
-            <strong>B.Tech in Computer Science and Engineering:</strong> Templecity Institute of Technology (2019–2023 | 74%)
+            <strong>MBA in Business Analytics and Data Science:</strong> Bengal Institute of Business Studies (2024 to 2026 | 71%)<br>
+            <strong>B.Tech in Computer Science and Engineering:</strong> Templecity Institute of Technology (2019 to 2023 | 74%)
           </p>
         </div>
 
         <div class="resume-section">
           <h4 class="resume-section-title">Certifications</h4>
           <p class="resume-text">
-            IIT Kanpur: Advanced Excel & Power BI • IBM: Business Intelligence Specialist • IBM: Databases and SQL for Data Science
+            IIT Kanpur: Advanced Excel and Power BI • IBM: Business Intelligence Specialist • IBM: Databases and SQL for Data Science
           </p>
         </div>
       </div>
